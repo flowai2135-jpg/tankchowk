@@ -2,6 +2,14 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>TANK WAR: MAZE BATTLE</title>
+<meta name="theme-color" content="#070a07">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Tank War">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 :root{--js:1}
@@ -102,6 +110,53 @@ body:not(.touch) #joy,body:not(.touch) #fire{display:none}
 .sk canvas{position:static;inset:auto;width:120px;height:80px;background:#1a211a;border-radius:6px}
 .sk b{color:#39ff6a;letter-spacing:2px;font-size:15px}.sk span{font:11px/1.4 system-ui,sans-serif;color:#b9d6bb;min-height:30px}
 #lbf{width:min(430px,92vw);display:flex;flex-direction:column;gap:4px;font:14px system-ui,sans-serif}
+
+/* ===== Mobile scaling (--u is set from screen size in resize()) ===== */
+:root{--u:1}
+#joy{width:calc(140px*var(--js)*var(--u));height:calc(140px*var(--js)*var(--u));left:calc(22px*var(--u) + env(safe-area-inset-left));bottom:calc(18px*var(--u) + env(safe-area-inset-bottom))}
+#fire{width:calc(110px*var(--u));height:calc(110px*var(--u));font-size:calc(20px*var(--u));right:calc(22px*var(--u) + env(safe-area-inset-right));bottom:calc(18px*var(--u) + env(safe-area-inset-bottom))}
+#msl{width:calc(80px*var(--u));height:calc(80px*var(--u));right:calc(30px*var(--u) + env(safe-area-inset-right));bottom:calc(140px*var(--u) + env(safe-area-inset-bottom))}
+body:not(.touch) #msl{bottom:24px;right:24px;width:80px;height:80px}
+#msl span{font-size:calc(14px*var(--u))}
+body.touch #hud{font-size:calc(12px*var(--u))}
+body.touch #tc{font-size:calc(14px*var(--u))}
+body.touch #tr{font-size:calc(18px*var(--u))}
+body.touch #pbtn{padding:calc(5px*var(--u)) calc(12px*var(--u))}
+/* short screens (phones in landscape) */
+@media (max-height:500px){
+ .scr:not(#menu){justify-content:flex-start;gap:7px;padding:8px}
+ .scr:not(#menu)>:first-child{margin-top:auto}.scr:not(#menu)>:last-child{margin-bottom:auto}
+ h1{font-size:clamp(30px,9vh,56px)}h1 small{letter-spacing:6px}
+ h2{font-size:20px}
+ .btn{font-size:15px;padding:7px 16px;min-width:150px;border-radius:8px}
+ .btn.sm{font-size:12px;padding:6px 10px;min-width:0}
+ .btn.st{font-size:18px;padding:7px 22px;min-width:120px}
+ .btn small{font-size:9px;margin-top:1px}
+ .in{padding:8px;font-size:15px}
+ .p{font-size:12px;line-height:1.4}
+ #rcode{font-size:30px;min-height:34px}
+ #mapl{gap:8px}.mc{width:min(150px,22vw);padding:6px}.mc b{font-size:13px}.mc span{display:none}
+ #skl{gap:8px}.sk{width:min(150px,23vw);padding:6px;gap:3px}.sk canvas{width:84px;height:56px}.sk span{font-size:10px;min-height:0}.sk b{font-size:13px}
+ #menu{gap:4px;padding-top:calc(6px + env(safe-area-inset-top));padding-bottom:calc(6px + env(safe-area-inset-bottom))}
+ .card{padding:5px 8px}.ct{font-size:11px;margin-bottom:3px}
+ .lcol{gap:5px;width:clamp(130px,24vw,190px)}
+ #lav{width:30px;height:30px;font-size:16px}#lme b{font-size:13px}
+ #rki{width:30px;height:30px}#rkn{font-size:15px}#rkp{font-size:17px}
+ #stage canvas{width:auto;max-width:100%;max-height:calc(100vh - 150px)}
+ #fplus{width:46px;height:46px;font-size:26px}#fslot{width:50px}
+ .tab{font-size:11px;padding:4px 7px}.tab small{font-size:8px}
+ #lbf{font-size:12px}
+ #toast{top:6px;font-size:12px;padding:5px 12px}
+}
+/* rotate-your-phone overlay (touch devices held in portrait) */
+#rot{position:fixed;inset:0;z-index:500;display:none;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:#070a07;text-align:center;padding:24px;color:#e8f5e8}
+#rot b{font:clamp(26px,8vw,40px) Impact,sans-serif;letter-spacing:3px;color:#39ff6a}
+#rot span{font:15px/1.5 system-ui,sans-serif;color:#b9d6bb;max-width:300px}
+#rot i{display:block;width:64px;height:104px;border:5px solid #ff8a1f;border-radius:12px;position:relative;animation:rotp 2.2s ease-in-out infinite}
+#rot i::after{content:"";position:absolute;left:50%;bottom:6px;width:16px;height:4px;margin-left:-8px;border-radius:2px;background:#ff8a1f}
+@keyframes rotp{0%,25%{transform:rotate(0)}65%,100%{transform:rotate(-90deg)}}
+@media (orientation:portrait) and (pointer:coarse) and (max-width:1000px){#rot{display:flex}}
+.btn.sm.ib{border-color:#6fb8ff}
 </style></head><body>
 <canvas id="c"></canvas>
 <div id="hud" class="hide"><div id="tl"></div><div id="tc"><span id="mode"></span><span id="timer">0:00</span><button id="pbtn">II</button></div><div id="tr"></div></div>
@@ -112,7 +167,7 @@ body:not(.touch) #joy,body:not(.touch) #fire{display:none}
 
 <div class="scr hide" id="menu">
 <div class="lt"><div class="card" id="lme"><div id="lav">T</div><div><b id="rku"></b><span id="lst"></span></div></div>
-<div class="lbtns"><button class="btn o sm" id="shopb">SHOP <span class="cn"><i></i><b id="mcoins">0</b></span></button><button class="btn o sm" id="hb">HOW TO PLAY</button><button class="btn o sm" id="sb">SETTINGS</button><button class="btn o sm" id="lout">LOGOUT</button></div></div>
+<div class="lbtns"><button class="btn o sm" id="shopb">SHOP <span class="cn"><i></i><b id="mcoins">0</b></span></button><button class="btn o sm" id="hb">HOW TO PLAY</button><button class="btn o sm ib hide instb">INSTALL APP</button><button class="btn o sm" id="sb">SETTINGS</button><button class="btn o sm" id="lout">LOGOUT</button></div></div>
 <div class="lm">
 <div class="lcol"><div class="card"><b class="ct">INVITE FRIENDS</b><div class="p" style="font-size:12px;margin:0 0 6px">Make a room, share the code, and your friend joins you.</div><button class="btn sm" id="invb" style="width:100%;min-width:0">+ INVITE / JOIN</button></div>
 <div class="card"><b class="ct" id="mit"></b><div class="p" id="mi" style="font-size:12px;margin:0"></div></div></div>
@@ -127,7 +182,7 @@ body:not(.touch) #joy,body:not(.touch) #fire{display:none}
 <div class="scr" id="login"><h1>TANK WAR<small>MAZE BATTLE</small></h1>
 <input class="in" id="lu" maxlength="10" placeholder="USERNAME" autocomplete="username" autocapitalize="off" spellcheck="false">
 <input class="in" id="lp" type="password" maxlength="32" placeholder="PASSWORD" autocomplete="current-password">
-<button class="btn" id="lgo">LOGIN</button><button class="btn o" id="lreg">CREATE ACCOUNT</button>
+<button class="btn" id="lgo">LOGIN</button><button class="btn o" id="lreg">CREATE ACCOUNT</button><button class="btn o sm ib hide instb">INSTALL APP / ADD TO HOME SCREEN</button>
 <div class="p" id="lmsg" style="margin:0;min-height:20px;color:#ffb040"></div><div class="p" id="lnote" style="margin:0;font-size:12px"></div></div>
 
 <div class="scr hide" id="shop"><h2>SHOP <span class="cn" style="font-size:18px"><i></i><b id="scoins">0</b></span></h2><div class="p" style="margin:0">Win a match = +100 coins. Better skins = better perks.</div><div id="skl"></div><button class="btn o" id="shback">BACK</button></div>
@@ -161,6 +216,7 @@ Bullets: 10 dmg. Missile: 35 direct + 15 splash (65 px radius). Walls block ever
 
 <div class="scr hide" id="end"><h1 id="et"></h1><div class="p" id="es"></div><button class="btn" id="again">PLAY AGAIN</button><button class="btn o" id="emenu">MAIN MENU</button></div>
 
+<div id="rot"><i></i><b>ROTATE YOUR PHONE</b><span>Tank War landscape mein chalta hai. Phone ko side (horizontal) kar lein, game khud aa jayega. Auto-rotate ON rakhein.</span></div>
 <div id="toast"></div>
 <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>
@@ -517,7 +573,14 @@ function menuAnim(dt){ctx.setTransform(dpr,0,0,dpr,0,0);const w=innerWidth,h=inn
 
 /* ===== Main loop (single rAF loop for the whole page lifetime) ===== */
 let last=0;
-function resize(){dpr=Math.min(devicePixelRatio||1,2);cv.width=innerWidth*dpr;cv.height=innerHeight*dpr;z=Math.max(.55,Math.min(1.3,Math.min(innerWidth/760,innerHeight/520)))}
+const COARSE=matchMedia('(pointer:coarse)').matches;
+function resize(){dpr=Math.min(devicePixelRatio||1,2);cv.width=innerWidth*dpr;cv.height=innerHeight*dpr;
+ const base=Math.min(innerWidth/760,innerHeight/520);
+ /* phones: world is zoomed out a bit so tank + maze scale down with the screen */
+ z=COARSE?Math.max(.4,Math.min(1,base*.85)):Math.max(.55,Math.min(1.3,base));
+ /* touch buttons / HUD shrink on small screens */
+ const u=COARSE?Math.max(.55,Math.min(1.1,Math.min(innerWidth,innerHeight)/430)):1;
+ document.documentElement.style.setProperty('--u',u.toFixed(3))}
 function loop(ts){const dt=Math.min(.05,(ts-last)/1000||0);last=ts;
  if(state==='menu'||(state==='end'&&!mazeCv))menuAnim(dt);else{update(dt);render()}requestAnimationFrame(loop)}
 
@@ -765,5 +828,31 @@ $('lout').onclick=clk(logout);$('lbm').onclick=clk(openBoard);$('lbback').onclic
 $('shopb').onclick=clk(()=>{renderShop();show('shop')});$('shback').onclick=clk(()=>show('menu'));
 $('lnote').textContent=CLOUD?'Online accounts and leaderboard.':'Offline mode: accounts and leaderboard are saved on this device.';
 if(matchMedia('(pointer:coarse)').matches){document.body.classList.add('touch');aimMode='touch'}
+
+/* ===== Mobile: landscape lock, rotate overlay, install (PWA) ===== */
+const STANDALONE=matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches||navigator.standalone===true;
+function lockLandscape(){try{
+ const go=()=>{try{screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape').catch(()=>{})}catch(e){}};
+ const el=document.documentElement;
+ if(!document.fullscreenElement&&el.requestFullscreen){el.requestFullscreen({navigationUI:'hide'}).then(go).catch(go)}else go()}catch(e){}}
+if(COARSE){
+ if(STANDALONE)lockLandscape();
+ else{let tried=false;addEventListener('pointerup',()=>{if(tried)return;tried=true;lockLandscape()},{capture:true})}
+ const portrait=matchMedia('(orientation:portrait) and (max-width:1000px)');
+ const onRot=()=>{if(portrait.matches&&state==='play')pause(true);setTimeout(resize,150)};
+ (portrait.addEventListener?portrait.addEventListener('change',onRot):portrait.addListener(onRot));
+ addEventListener('orientationchange',()=>setTimeout(resize,250));
+}
+let deferredInstall=null;
+const IOS=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const showInst=v=>document.querySelectorAll('.instb').forEach(b=>b.classList.toggle('hide',!v));
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e;showInst(true)});
+addEventListener('appinstalled',()=>{deferredInstall=null;showInst(false);toast('Installed! Home screen se Tank War kholein.')});
+if(IOS&&!STANDALONE)showInst(true);
+document.querySelectorAll('.instb').forEach(b=>b.addEventListener('click',async()=>{
+ if(deferredInstall){deferredInstall.prompt();try{await deferredInstall.userChoice}catch(e){}deferredInstall=null;showInst(false)}
+ else if(IOS){toast('Safari mein Share button > "Add to Home Screen" dabayen')}
+ else toast('Browser menu (3 dots) > "Install app" / "Add to Home screen"')}));
+if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol))addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 applyS();resize();updMapLbl();genMaze();requestAnimationFrame(loop);resumeSession();
 </script></body></html>
