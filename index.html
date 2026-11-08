@@ -157,6 +157,37 @@ body.touch #pbtn{padding:calc(5px*var(--u)) calc(12px*var(--u))}
 @keyframes rotp{0%,25%{transform:rotate(0)}65%,100%{transform:rotate(-90deg)}}
 @media (orientation:portrait) and (pointer:coarse) and (max-width:1000px){#rot{display:flex}}
 .btn.sm.ib{border-color:#6fb8ff}
+
+/* ===== Compact main menu: phones in landscape / small windows (no overlapping) ===== */
+@media (max-height:500px),(max-width:620px){
+ #menu{justify-content:flex-start;overflow-y:auto;overflow-x:hidden}
+ #menu .lt,#menu .lb{flex:none;flex-wrap:nowrap;gap:6px}
+ #menu .lm{flex:1 0 auto;min-height:100px;gap:6px}
+ .lbtns{flex-wrap:nowrap;gap:4px}
+ .lbtns .btn.sm{white-space:nowrap;font-size:11px;padding:5px 8px}
+ #lme span{display:none}
+ .lcol .p{display:none}
+ .lcol>.card:has(#mi){display:none}
+ #rks{display:none}
+ #lbr .lr:nth-child(n+3):not(.me){display:none}
+ #lbo{display:none}
+ #tabs{flex-wrap:nowrap;gap:4px;min-width:0}
+ .tab,#mapb{white-space:nowrap;font-size:11px!important;padding:4px 7px!important;min-width:0!important}
+ .tab small,#mapb small{display:none}
+ #menu .btn.st{font-size:16px;padding:6px 16px;min-width:0;white-space:nowrap}
+ #menu .btn.st small{display:none}
+ #stage canvas{max-height:calc(100vh - 140px)}
+ #fslot{top:6%;width:44px}#fplus{width:38px;height:38px;font-size:22px}#fname{font-size:8px}
+ #sname{font-size:11px}
+ .lcol{width:clamp(105px,22vw,170px)}
+}
+@media (max-width:480px){
+ .lcol{width:100px}
+ .lcol .btn.sm{font-size:10px;padding:5px 4px}
+ #rkn{font-size:13px}#rkp{font-size:15px}#rki{width:24px;height:24px}
+ .lr{font-size:10px}
+ #menu .lt{flex-wrap:wrap}
+}
 </style></head><body>
 <canvas id="c"></canvas>
 <div id="hud" class="hide"><div id="tl"></div><div id="tc"><span id="mode"></span><span id="timer">0:00</span><button id="pbtn">II</button></div><div id="tr"></div></div>
