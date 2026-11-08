@@ -122,32 +122,6 @@ body.touch #hud{font-size:calc(12px*var(--u))}
 body.touch #tc{font-size:calc(14px*var(--u))}
 body.touch #tr{font-size:calc(18px*var(--u))}
 body.touch #pbtn{padding:calc(5px*var(--u)) calc(12px*var(--u))}
-/* short screens (phones in landscape) */
-@media (max-height:500px){
- .scr:not(#menu){justify-content:flex-start;gap:7px;padding:8px}
- .scr:not(#menu)>:first-child{margin-top:auto}.scr:not(#menu)>:last-child{margin-bottom:auto}
- h1{font-size:clamp(30px,9vh,56px)}h1 small{letter-spacing:6px}
- h2{font-size:20px}
- .btn{font-size:15px;padding:7px 16px;min-width:150px;border-radius:8px}
- .btn.sm{font-size:12px;padding:6px 10px;min-width:0}
- .btn.st{font-size:18px;padding:7px 22px;min-width:120px}
- .btn small{font-size:9px;margin-top:1px}
- .in{padding:8px;font-size:15px}
- .p{font-size:12px;line-height:1.4}
- #rcode{font-size:30px;min-height:34px}
- #mapl{gap:8px}.mc{width:min(150px,22vw);padding:6px}.mc b{font-size:13px}.mc span{display:none}
- #skl{gap:8px}.sk{width:min(150px,23vw);padding:6px;gap:3px}.sk canvas{width:84px;height:56px}.sk span{font-size:10px;min-height:0}.sk b{font-size:13px}
- #menu{gap:4px;padding-top:calc(6px + env(safe-area-inset-top));padding-bottom:calc(6px + env(safe-area-inset-bottom))}
- .card{padding:5px 8px}.ct{font-size:11px;margin-bottom:3px}
- .lcol{gap:5px;width:clamp(130px,24vw,190px)}
- #lav{width:30px;height:30px;font-size:16px}#lme b{font-size:13px}
- #rki{width:30px;height:30px}#rkn{font-size:15px}#rkp{font-size:17px}
- #stage canvas{width:auto;max-width:100%;max-height:calc(100vh - 150px)}
- #fplus{width:46px;height:46px;font-size:26px}#fslot{width:50px}
- .tab{font-size:11px;padding:4px 7px}.tab small{font-size:8px}
- #lbf{font-size:12px}
- #toast{top:6px;font-size:12px;padding:5px 12px}
-}
 /* rotate-your-phone overlay (touch devices held in portrait) */
 #rot{position:fixed;inset:0;z-index:500;display:none;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:#070a07;text-align:center;padding:24px;color:#e8f5e8}
 #rot b{font:clamp(26px,8vw,40px) Impact,sans-serif;letter-spacing:3px;color:#39ff6a}
@@ -158,36 +132,14 @@ body.touch #pbtn{padding:calc(5px*var(--u)) calc(12px*var(--u))}
 @media (orientation:portrait) and (pointer:coarse) and (max-width:1000px){#rot{display:flex}}
 .btn.sm.ib{border-color:#6fb8ff}
 
-/* ===== Compact main menu: phones in landscape / small windows (no overlapping) ===== */
-@media (max-height:500px),(max-width:620px){
- #menu{justify-content:flex-start;overflow-y:auto;overflow-x:hidden}
- #menu .lt,#menu .lb{flex:none;flex-wrap:nowrap;gap:6px}
- #menu .lm{flex:1 0 auto;min-height:100px;gap:6px}
- .lbtns{flex-wrap:nowrap;gap:4px}
- .lbtns .btn.sm{white-space:nowrap;font-size:11px;padding:5px 8px}
- #lme span{display:none}
- .lcol .p{display:none}
- .lcol>.card:has(#mi){display:none}
- #rks{display:none}
- #lbr .lr:nth-child(n+3):not(.me){display:none}
- #lbo{display:none}
- #tabs{flex-wrap:nowrap;gap:4px;min-width:0}
- .tab,#mapb{white-space:nowrap;font-size:11px!important;padding:4px 7px!important;min-width:0!important}
- .tab small,#mapb small{display:none}
- #menu .btn.st{font-size:16px;padding:6px 16px;min-width:0;white-space:nowrap}
- #menu .btn.st small{display:none}
- #stage canvas{max-height:calc(100vh - 140px)}
- #fslot{top:6%;width:44px}#fplus{width:38px;height:38px;font-size:22px}#fname{font-size:8px}
- #sname{font-size:11px}
- .lcol{width:clamp(105px,22vw,170px)}
-}
-@media (max-width:480px){
- .lcol{width:100px}
- .lcol .btn.sm{font-size:10px;padding:5px 4px}
- #rkn{font-size:13px}#rkp{font-size:15px}#rki{width:24px;height:24px}
- .lr{font-size:10px}
- #menu .lt{flex-wrap:wrap}
-}
+
+/* ===== Uniform scaling of every full-screen panel =====
+   Panels are laid out on a logical canvas of at least 760x440 and then scaled
+   down (--k) to fit the real screen, so nothing can overlap on small phones. */
+:root{--k:1}
+.scr{inset:auto;left:0;top:0;width:calc(100% / var(--k));height:calc(100% / var(--k));transform:scale(var(--k));transform-origin:0 0}
+@keyframes fi{from{opacity:0}}
+@media (max-width:640px){.mc{width:min(230px,30vw)}}
 </style></head><body>
 <canvas id="c"></canvas>
 <div id="hud" class="hide"><div id="tl"></div><div id="tc"><span id="mode"></span><span id="timer">0:00</span><button id="pbtn">II</button></div><div id="tr"></div></div>
@@ -611,7 +563,9 @@ function resize(){dpr=Math.min(devicePixelRatio||1,2);cv.width=innerWidth*dpr;cv
  z=COARSE?Math.max(.4,Math.min(1,base*.85)):Math.max(.55,Math.min(1.3,base));
  /* touch buttons / HUD shrink on small screens */
  const u=COARSE?Math.max(.55,Math.min(1.1,Math.min(innerWidth,innerHeight)/430)):1;
- document.documentElement.style.setProperty('--u',u.toFixed(3))}
+ document.documentElement.style.setProperty('--u',u.toFixed(3));
+ const k=Math.max(.4,Math.min(1,innerWidth/760,innerHeight/440));
+ document.documentElement.style.setProperty('--k',k.toFixed(3))}
 function loop(ts){const dt=Math.min(.05,(ts-last)/1000||0);last=ts;
  if(state==='menu'||(state==='end'&&!mazeCv))menuAnim(dt);else{update(dt);render()}requestAnimationFrame(loop)}
 
