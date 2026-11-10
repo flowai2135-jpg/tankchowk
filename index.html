@@ -158,7 +158,10 @@ body.touch #pbtn{padding:calc(5px*var(--u)) calc(12px*var(--u))}
 #ibox{width:min(440px,92vw);max-height:46vh;overflow:auto;display:flex;flex-direction:column;gap:5px;font:14px system-ui,sans-serif;text-align:left}
 .fr{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;background:rgba(0,0,0,.45)}.fr .u{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.fr.off{opacity:.55}
 .fr .btn.sm{min-width:0;padding:4px 12px;font-size:14px}.fh{color:#ffb040;letter-spacing:2px;font-size:12px;margin-top:4px}
-#ibadge{background:#ff3a3a;color:#fff;border-radius:9px;padding:0 6px;margin-left:4px;font:700 11px system-ui}
+#inbb{position:relative;white-space:nowrap}
+#ibadge{position:absolute;top:-5px;right:-3px;min-width:17px;height:17px;line-height:17px;box-sizing:border-box;padding:0 4px;border-radius:9px;background:#ff3a3a;color:#fff;border:1.5px solid #fff;text-align:center;font:700 11px/14px system-ui,sans-serif;letter-spacing:0;margin:0;animation:ibp 1.4s ease-in-out infinite}
+@keyframes ibp{50%{transform:scale(1.18)}}
+#flc{overflow:visible!important}#fl{overflow-y:auto}
 #pop,#fpop{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.6)}
 #pop .card,#fpop .card{text-align:center;padding:16px 20px;min-width:min(300px,86vw);display:flex;flex-direction:column;gap:10px;align-items:center}
 #fx{position:fixed;top:calc(50px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:5;pointer-events:none;font:700 13px system-ui,sans-serif;display:flex;gap:12px;text-shadow:0 0 4px #000;white-space:nowrap}
@@ -311,7 +314,7 @@ Bullets: 10 dmg. Missile: 35 direct + 15 splash (65 px radius). Walls block ever
 /* ===== Config & helpers ===== */
 const $=i=>document.getElementById(i),cv=$('c'),ctx=cv.getContext('2d');
 const T=56,COLS=10,ROWS=7,GW=COLS*2+1,GH=ROWS*2+1,W=GW*T,H=GH*T,R=16;
-const CLOUD=''; // paste a Firebase Realtime Database URL here for shared accounts + a global leaderboard; empty = saved on this device only
+const CLOUD='https://tank-game-2eea9-default-rtdb.asia-southeast1.firebasedatabase.app'.trim().replace(/\/+$/,''); // paste a Firebase Realtime Database URL here for shared accounts + a global leaderboard; empty = saved on this device only
 const TIERS=[{n:'BRONZE',s:3,c:'#cd7f32'},{n:'SILVER',s:5,c:'#c0c8d0'},{n:'GOLD',s:8,c:'#ffd24a'},{n:'PLATINUM',s:12,c:'#5fe0d0'},{n:'DIAMOND',s:25,c:'#6fb8ff'}];
 function rk(ps){let t=0,a=ps;for(;t<4;t++){if(a<TIERS[t].s)break;a-=TIERS[t].s}return{t,st:a,ti:TIERS[t]}}
 const diffOf=ps=>Math.min(1,ps/48);
@@ -919,7 +922,9 @@ async function doAuth(reg){
    const rec={u,uid:rndUid(),salt,alg,hash,ps:0,coins:0,owned:[0],skin:0,w:0,l:0,created:Date.now()};
    if(!await store.put('users/'+u,rec,true)){lmsg('That username is already taken');return}
    await store.put('pub/'+u,{ps:0,w:0,l:0});loginOK(rec)}
-  else{const rec=await store.get('users/'+u);if(!rec||!rec.hash){lmsg('No account with that username');return}
+  else{let rec=await store.get('users/'+u);
+   if((!rec||!rec.hash)&&CLOUD){const lr=(store.lget().users||{})[u];if(lr&&lr.hash){if(await hashPw(pw,lr.salt,lr.alg)!==lr.hash){lmsg('Wrong password');return}rec=lr;await store.put('users/'+u,lr,true);await store.put('pub/'+u,{ps:lr.ps||0,w:lr.w||0,l:lr.l||0})}}
+   if(!rec||!rec.hash){lmsg('No account with that username');return}
    if(await hashPw(pw,rec.salt,rec.alg)!==rec.hash){lmsg('Wrong password');return}loginOK(rec)}
  }catch(e){lmsg(e.message==='nosub'?'This account needs a secure (https) page to log in':'Connection problem. Try again.')}
  finally{bs.forEach(b=>b.disabled=false)}}
@@ -1028,7 +1033,7 @@ $('lgo').onclick=()=>doAuth(false);$('lreg').onclick=()=>doAuth(true);
 [$('lu'),$('lp')].forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter')doAuth(false)}));
 $('lout').onclick=clk(logout);$('lbm').onclick=clk(openBoard);$('lbback').onclick=clk(()=>show('menu'));
 $('shopb').onclick=clk(()=>{renderShop();show('shop')});$('shback').onclick=clk(()=>show('menu'));
-$('lnote').textContent=CLOUD?'Online accounts and leaderboard.':'Offline mode: accounts and leaderboard are saved on this device.';
+$('lnote').textContent=CLOUD?'Online accounts and leaderboard.':'OFFLINE MODE: accounts/friends sirf is browser mein hain. Dusre device ke liye CLOUD URL set karo.';if(!CLOUD)$('lnote').style.color='#ff8a1f';
 if(matchMedia('(pointer:coarse)').matches){document.body.classList.add('touch');aimMode='touch'}
 
 /* ===== Mobile: landscape lock, rotate overlay, install (PWA) ===== */
