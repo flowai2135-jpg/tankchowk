@@ -183,7 +183,7 @@ body.touch #pbtn{padding:calc(5px*var(--u)) calc(12px*var(--u))}
 .fl.off{opacity:.5}.fl.off .od{background:#555;box-shadow:none}
 .fl .od{margin-right:0}
 .fl .fi{font:900 14px Impact;width:22px;height:20px;line-height:1;padding:0;border-radius:5px;border:1px solid #39ff6a;background:#12341a;color:#39ff6a;cursor:pointer}
-.fl .in{color:#39ff6a;font:700 12px system-ui}
+.fl .inl{color:#39ff6a;font:700 13px system-ui;flex:none}
 .fle{font:11px/1.4 system-ui,sans-serif;color:#8a9a8a;padding:4px 2px}
 #flb{display:flex;gap:5px}
 .mini{flex:1;min-width:0!important;padding:5px 6px!important;font-size:12px!important;letter-spacing:.5px!important}
@@ -275,6 +275,70 @@ body.touch #pbtn{padding:calc(5px*var(--u)) calc(12px*var(--u))}
 @keyframes ruf{from{opacity:0;transform:translateY(8px)}}
 @keyframes rua{from{opacity:0;transform:scale(.3)}}
 @keyframes rushk{0%,100%{transform:none}20%{transform:translate(-7px,4px)}40%{transform:translate(6px,-5px)}60%{transform:translate(-4px,3px)}80%{transform:translate(3px,-2px)}}
+
+/* ===== v6: responsive grid lobby, login row, delete dialog ===== */
+html,body{overscroll-behavior:none}
+#menu{display:grid;grid-template-columns:minmax(150px,24%) minmax(0,1fr) minmax(150px,24%);grid-template-rows:auto minmax(0,1fr) auto;gap:8px 12px;align-items:stretch;justify-content:stretch}
+#menu .lt{grid-column:1/-1;grid-row:1;align-items:center;gap:8px}
+#menu .lm{display:contents}
+#menu .lcol{width:auto;min-width:0;min-height:0}
+#menu #lcl{grid-column:1;grid-row:2;align-self:stretch;display:flex;flex-direction:column}
+#menu #stage{grid-column:2;grid-row:2;min-width:0;min-height:0;overflow:hidden;justify-content:center}
+#menu #rcl{grid-column:3;grid-row:2;align-self:start;margin:0}
+#menu .lb{grid-column:1/-1;grid-row:3;align-items:center}
+#flc{max-height:none!important;height:100%}
+#menu #stage #sw{display:block;flex:none;max-width:none}
+#menu #stage #sw canvas{display:block;position:static;width:100%;height:100%;max-width:none;max-height:none}
+.fs{width:clamp(40px,calc(58px*var(--k,1)),64px)}
+.fs span{width:clamp(34px,calc(54px*var(--k,1)),58px);height:clamp(34px,calc(54px*var(--k,1)),58px);font-size:clamp(20px,calc(30px*var(--k,1)),32px)}
+.fs.on small{top:clamp(34px,calc(54px*var(--k,1)),56px)}
+#lme{min-width:0;flex:0 1 auto}#lme>div:nth-child(2){min-width:0}#lst,#sea{white-space:nowrap}
+#lalb small{font:700 9px system-ui;color:#ffb040;letter-spacing:1px;white-space:nowrap}
+#menu #sbox{flex-direction:row;align-items:stretch;gap:8px}
+#menu #rkc{min-width:150px;display:flex;flex-direction:column;justify-content:center}
+#menu #playb{min-width:150px}
+.fl{padding:4px 6px;gap:6px;min-height:34px}
+.fl .fn{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;line-height:1.15}
+.fl .u{flex:none;max-width:100%;font-size:12px}
+.fl .t{display:block!important;font-size:9px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fl .fi{width:30px;height:26px;font-size:16px;flex:none}
+.fl .sent{flex:none}
+.fl .sent{font:700 9px system-ui;color:#ffb040;letter-spacing:.5px}
+#fcnt{font:700 10px system-ui;letter-spacing:1px;margin-left:6px}
+.mini{white-space:nowrap;font-size:12px!important;padding:6px 4px!important}
+#flc.flash{animation:flsh .9s}
+@keyframes flsh{50%{box-shadow:0 0 22px #39ff6a;border-color:#39ff6a}}
+@media (max-width:700px){#menu{grid-template-columns:minmax(132px,26%) minmax(0,1fr) minmax(132px,26%)}}
+@media (max-height:430px){
+ #menu{gap:6px 10px;padding-top:calc(5px + env(safe-area-inset-top));padding-bottom:calc(5px + env(safe-area-inset-bottom))}
+ #lav{width:28px;height:28px;font-size:15px}
+ #lme{padding:4px 8px}#lme b{font-size:12px}#lst{font-size:9.5px}#sea{font-size:9px;margin-top:0}
+ .lbtns .btn{font-size:12px;padding:5px 9px}
+ #menu .lb .btn{padding:6px 10px;font-size:12px}
+ #menu #playb{font-size:17px;padding:5px 16px;min-width:130px}
+ #menu #rkc{min-width:132px}
+ .fl{min-height:30px;padding:3px 5px}
+ #lbr .lr:nth-child(n+4):not(.me){display:none}
+ #sname{font-size:11px}
+}
+@media (max-height:350px){
+ #menu .lb .btn small{display:none}
+ #menu #playb small{display:block;font-size:8px}
+ #sea{display:none}
+}
+.lin{display:flex;flex-direction:column;gap:10px;align-items:center}
+.brow{display:flex;gap:12px;justify-content:center;flex-wrap:nowrap;width:min(440px,94vw)}
+.brow .btn{flex:1;min-width:0;padding:12px 8px;white-space:nowrap}
+#login .instb{position:absolute;right:calc(10px + env(safe-area-inset-right));bottom:calc(8px + env(safe-area-inset-bottom));margin:0!important;min-width:0}
+#login #lnote{padding:0 110px}
+@media (max-height:500px){.lin{flex-direction:row;flex-wrap:wrap;justify-content:center}.lin .in{width:min(240px,40vw)}.brow .btn{padding:8px 6px}}
+#dpop{position:fixed;inset:0;z-index:310;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.78);font:13px system-ui}
+#dpop .card{text-align:center;padding:14px 18px;width:min(430px,92vw);max-height:96vh;overflow:auto;display:flex;flex-direction:column;gap:9px;align-items:center;border-color:#ff5a5a;box-shadow:0 0 26px #ff3a3a55}
+#dpop label{display:flex;gap:8px;align-items:flex-start;text-align:left;font:12px/1.4 system-ui;color:#ffc9c2}
+#dpop label input{margin-top:2px;width:16px;height:16px;flex:none}
+#dgo{border-color:#ff3a3a;background:linear-gradient(#7a1a1a,#3a0a0a)}
+.dng{border-color:#ff5a5a!important;color:#ff9a8f!important}
+.scr:not(#menu):not(#login):not(#end):not(#pause)>.btn.o:last-child{position:sticky;bottom:4px;z-index:3;flex:none}
 </style></head><body>
 <canvas id="c"></canvas>
 <div id="hud" class="hide"><div id="tl"></div><div id="tc"><span id="mode"></span><span id="timer">0:00</span><button id="micg" class="micb hudmic mute hide" aria-label="Mic"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-3.1A7 7 0 0 0 19 11z" fill="currentColor"/><path class="sl" d="M4 4l16 16" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button><button id="pbtn">II</button></div><div id="tr"></div></div>
@@ -286,9 +350,9 @@ body.touch #pbtn{padding:calc(5px*var(--u)) calc(12px*var(--u))}
 
 <div class="scr hide" id="menu">
 <div class="lt"><div class="card" id="lme" style="cursor:pointer"><div id="lav">T</div><div><b id="rku"></b><span id="lst"></span><span id="sea"></span></div><i id="lalb"></i></div>
-<div class="lbtns"><button class="btn o sm" id="shopb">SHOP <span class="cn"><i></i><b id="mcoins">0</b></span></button><button class="btn o sm micb mute" id="micb" aria-label="Mic"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-3.1A7 7 0 0 0 19 11z" fill="currentColor"/><path class="sl" d="M4 4l16 16" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button><div id="hmw"><button class="btn o sm" id="hmb" aria-label="Menu">&#9776;</button><div id="hmenu" class="hide"><button class="btn o sm" id="albb">COLONEL ALBUM</button><button class="btn o sm" id="hb">HOW TO PLAY</button><button class="btn o sm" id="sb">SETTINGS</button><button class="btn o sm ib hide instb">INSTALL APP</button><button class="btn o sm" id="lout">LOGOUT</button></div></div></div></div>
+<div class="lbtns"><button class="btn o sm" id="shopb">SHOP <span class="cn"><i></i><b id="mcoins">0</b></span></button><button class="btn o sm micb mute" id="micb" aria-label="Mic"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-3.1A7 7 0 0 0 19 11z" fill="currentColor"/><path class="sl" d="M4 4l16 16" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button><div id="hmw"><button class="btn o sm" id="hmb" aria-label="Menu">&#9776;</button><div id="hmenu" class="hide"><button class="btn o sm" id="hb">HOW TO PLAY</button><button class="btn o sm" id="sb">SETTINGS</button><button class="btn o sm ib hide instb">INSTALL APP</button><button class="btn o sm" id="lout">LOGOUT</button><button class="btn o sm dng" id="delb">DELETE ACCOUNT</button></div></div></div></div>
 <div class="lm">
-<div class="lcol" id="lcl"><div class="card" id="flc"><b class="ct">FRIEND LIST</b><div id="fl"></div><div id="flb"><button class="btn sm mini" id="fadd2">+ ADD</button><button class="btn o sm mini" id="inbb">INBOX<b id="ibadge" class="hide">0</b></button></div></div>
+<div class="lcol" id="lcl"><div class="card" id="flc"><b class="ct">FRIENDS<span id="fcnt"></span></b><div id="fl"></div><div id="flb"><button class="btn sm mini" id="fadd2">+ ADD</button><button class="btn o sm mini" id="inbb">INBOX<b id="ibadge" class="hide">0</b></button></div></div>
 </div>
 <div id="stage"><div id="sw"><canvas id="lstage" width="480" height="260"></canvas><div class="fs" style="left:12.5%;top:36%"><span>+</span><small>INVITE</small></div><div class="fs" style="left:12.5%;top:76%"><span>+</span><small>INVITE</small></div><div class="fs" style="left:87.5%;top:58%"><span>+</span><small>INVITE</small></div></div><div id="sname"></div></div>
 <div class="lcol" id="rcl"><div class="card" id="lbm" style="cursor:pointer"><b class="ct">LEADERBOARD &rsaquo;</b><div id="lbo"></div><div id="lbr"></div></div></div>
@@ -299,10 +363,11 @@ body.touch #pbtn{padding:calc(5px*var(--u)) calc(12px*var(--u))}
 </div>
 
 <div class="scr" id="login"><h1>TANK WAR<small>MAZE BATTLE</small></h1>
-<input class="in" id="lu" maxlength="10" placeholder="USERNAME" autocomplete="username" autocapitalize="off" spellcheck="false">
-<input class="in" id="lp" type="password" maxlength="32" placeholder="PASSWORD" autocomplete="current-password">
-<button class="btn" id="lgo">LOGIN</button><button class="btn o" id="lreg">CREATE ACCOUNT</button><button class="btn o sm ib hide instb">INSTALL APP / ADD TO HOME SCREEN</button>
-<div class="p" id="lmsg" style="margin:0;min-height:20px;color:#ffb040"></div><div class="p" id="lnote" style="margin:0;font-size:12px"></div></div>
+<div class="lin"><input class="in" id="lu" maxlength="10" placeholder="USERNAME" autocomplete="username" autocapitalize="off" spellcheck="false">
+<input class="in" id="lp" type="password" maxlength="32" placeholder="PASSWORD" autocomplete="current-password"></div>
+<div class="brow"><button class="btn" id="lgo">LOGIN</button><button class="btn o" id="lreg">CREATE ACCOUNT</button></div>
+<div class="p" id="lmsg" style="margin:0;min-height:20px;color:#ffb040"></div><div class="p" id="lnote" style="margin:0;font-size:12px"></div>
+<button class="btn o sm ib hide instb">INSTALL APP</button></div>
 
 <div class="scr hide" id="shop"><h2>SHOP <span class="cn" style="font-size:18px"><i></i><b id="scoins">0</b></span></h2><div class="p" style="margin:0">Win a match = +100 coins. Tanks, bullets aur missiles ke apne fayde aur nuksan hain.</div><div id="stabs"><button class="stb sel" data-s="0">TANKS</button><button class="stb" data-s="1">BULLETS</button><button class="stb" data-s="2">MISSILES</button></div><div id="skl"></div><button class="btn o" id="shback">BACK</button></div>
 
@@ -314,7 +379,7 @@ body.touch #pbtn{padding:calc(5px*var(--u)) calc(12px*var(--u))}
 <div class="scr hide" id="how"><h2>HOW TO PLAY</h2>
 <div class="p"><b>Desktop:</b> W A S D move &middot; Mouse aims &middot; Left click shoots &middot; SPACE launches missile &middot; ESC pauses.<br>
 <b>Mobile:</b> left joystick moves (turret auto-aims at visible enemies) &middot; hold FIRE to shoot &middot; tap the missile button (60 s base reload).<br>
-Bullets: 10 dmg. Missile: 35 direct + 15 splash (65 px radius). Walls block everything. No friendly fire. Eliminate every enemy tank to win.<br><b>Battle Royale (ranked):</b> 10 tanks, last one alive wins. The purple storm shrinks and burns anything outside it. 1st = +2 stars, top 3 = +1, top 5 = 0, below = &minus;1 (quitting counts as a loss). Higher rank = smarter bots. Coins for placement and kills.<br><b>Ranks:</b> BRONZE &rsaquo; SILVER &rsaquo; GOLD &rsaquo; PLATINUM &rsaquo; DIAMOND &rsaquo; COLONEL (50 stars). Colonel banne par COLONEL ALBUM mein medal aata hai.<br><b>Seasons:</b> har season 30 din ka hota hai. Naya season shuru hote hi har player 2 rank peeche aa jata hai.<br><b>Friends:</b> friend list mein + dabao, woh accept kare to seedha tumhare lobby mein aa jata hai. Host START karta hai.</div>
+Bullets: 10 dmg. Missile: 35 direct + 15 splash (65 px radius). Walls block everything. No friendly fire. Eliminate every enemy tank to win.<br><b>Battle Royale (ranked):</b> 10 tanks, last one alive wins. The purple storm shrinks and burns anything outside it. 1st = +2 stars, top 3 = +1, top 5 = 0, below = &minus;1 (quitting counts as a loss). Higher rank = smarter bots. Coins for placement and kills.<br><b>Ranks:</b> BRONZE &rsaquo; SILVER &rsaquo; GOLD &rsaquo; PLATINUM &rsaquo; DIAMOND &rsaquo; COLONEL (50 stars). Colonel banne par COLONEL ALBUM mein medal aata hai.<br><b>Seasons:</b> har season 30 din ka hota hai. Naya season shuru hote hi har player 2 rank peeche aa jata hai.<br><b>Friends:</b> friend list mein + dabao. Friend online ho to woh khud-ba-khud tumhare lobby mein aa jata hai (koi code ya accept nahi). Host START karta hai.</div>
 <button class="btn o" id="hback">BACK</button></div>
 
 <div class="scr hide" id="set"><h2>SETTINGS</h2>
@@ -332,7 +397,7 @@ Bullets: 10 dmg. Missile: 35 direct + 15 splash (65 px radius). Walls block ever
 <div id="rot"><i></i><b>ROTATE YOUR PHONE</b><span>Tank War landscape mein chalta hai. Phone ko side (horizontal) kar lein, game khud aa jayega. Auto-rotate ON rakhein.</span></div>
 <div class="scr hide" id="frs"><h2>ADD FRIEND</h2><div class="p" style="margin:0">Your ID: <b id="myuid"></b> &middot; share it so friends can add you</div>
 <div style="display:flex;gap:6px"><input class="in" id="fadd" maxlength="10" placeholder="FRIEND ID / NAME" style="width:min(230px,55vw)"><button class="btn sm" id="faddb" style="min-width:0">ADD</button></div>
-<div class="p" style="margin:0;font-size:12px">Friend online ho to lobby mein uske naam ke saamne + dabao. Accept karte hi woh seedha tumhare lobby mein aa jayega (koi code nahi).</div>
+<div class="p" style="margin:0;font-size:12px">Friend online ho to lobby mein uske naam ke saamne + dabao. Woh khud-ba-khud tumhare lobby mein aa jayega (koi code ya accept nahi).</div>
 <button class="btn o" id="frback">BACK</button></div>
 <div class="scr hide" id="inb"><h2>INBOX</h2><div class="p" style="margin:0">Friend requests aur game invites yahan aate hain.</div><div id="ibox"></div><button class="btn o" id="inback">BACK</button></div>
 <div id="mpop" class="hide"><div class="card"><b class="ct">SELECT MODE</b><div id="tabs">
@@ -341,11 +406,18 @@ Bullets: 10 dmg. Missile: 35 direct + 15 splash (65 px radius). Walls block ever
 <button class="tab" data-m="2">2v2 TEAM<small>CLASSIC</small><em>You + ally vs 2 enemies. A friend can be your ally. Unranked.</em></button></div>
 <button class="btn o sm" id="mclose" style="min-width:120px">CLOSE</button></div></div>
 <div id="fpop" class="hide"><div class="card"><b class="ct" id="fpn"></b><div style="display:flex;gap:8px"><button class="btn sm" id="fpf" style="min-width:0">FLAGSHIP</button><button class="btn o sm" id="fpk" style="min-width:0">KICK</button></div><div class="p" style="font-size:11px;margin:0;max-width:240px">FLAGSHIP = yeh friend lobby ka host ban jata hai aur game wohi start karega.</div><button class="btn o sm" id="fpc" style="min-width:100px">CANCEL</button></div></div>
+<div id="dpop" class="hide"><div class="card"><b class="ct" style="color:#ff6a5a;font-size:16px;margin:0">&#9888; DELETE ACCOUNT</b>
+<div class="p" style="margin:0;color:#ffc9c2;font-size:13px"><b style="color:#ff6a5a">CAUTION:</b> yeh action <b style="color:#ff6a5a">permanent</b> hai. Tumhara account, rank, coins, shop items, Colonel album, friend list aur leaderboard entry hamesha ke liye delete ho jayenge. Wapas nahi aayenge.</div>
+<label><input type="checkbox" id="dchk"><span>Haan, mujhe pata hai ke yeh wapas nahi ho sakta.</span></label>
+<input class="in" id="dpw" type="password" maxlength="32" placeholder="PASSWORD DALO" autocomplete="current-password" style="width:min(260px,80%)">
+<div class="p" id="dmsg" style="margin:0;min-height:16px;color:#ffb040;font-size:12px"></div>
+<div style="display:flex;gap:8px"><button class="btn sm" id="dgo" disabled style="min-width:0">DELETE FOREVER</button><button class="btn o sm" id="dno" style="min-width:0">CANCEL</button></div></div></div>
 <div id="pop" class="hide"><div class="card"><b class="ct" id="popt"></b><div class="p" id="popm" style="margin:0"></div><div style="display:flex;gap:8px"><button class="btn sm" id="popy" style="min-width:0">ACCEPT</button><button class="btn o sm" id="popn" style="min-width:0">REJECT</button></div></div></div>
 <div class="scr hide" id="alb"><h2>COLONEL ALBUM</h2><div class="p" id="albs" style="margin:0"></div><div id="albl"></div><button class="btn o" id="albback">BACK</button></div>
 <div id="rup" class="hide"><div id="rupg"></div><div id="rupr"></div><canvas id="rupc"></canvas><div id="rupf"></div><div id="rupbox"></div><div id="rupx">TAP TO CONTINUE</div></div>
 <div id="toast"></div>
 <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script>window.Peer||document.write('<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"><\/script>')</script>
 <script>
 'use strict';
 /* ===== Config & helpers ===== */
@@ -655,7 +727,13 @@ function showEnd(){state='end';
 function toMenu(keep){
  if(ranked&&mode===3&&!settled&&(state==='play'||state==='pause'||state==='ending')){toast('Left a ranked match: '+settleBR(myPlace||10,score[0]))}else if(ranked&&!settled&&(state==='play'||state==='pause'||state==='ending')){const w=state==='ending'&&tanks.some(t=>t.team===0&&t.alive)&&!tanks.some(t=>t.team===1&&t.alive);toast((w?'Victory! ':'Left a ranked match: ')+settle(w))}
  if(!(keep&&netLive()))netClose();state='menu';A.music=false;A.eng(0);['hud','joy','fire','msl','cd'].forEach(i=>$(i).classList.add('hide'));show('menu');if(P){renderSide();saving.then(refreshBoard)}}
-function show(id){document.querySelectorAll('.scr').forEach(e=>e.classList.toggle('hide',e.id!==id))}
+const SUBS=['shop','lbs','maps','how','set','frs','inb','alb'];
+function show(id){document.querySelectorAll('.scr').forEach(e=>e.classList.toggle('hide',e.id!==id));
+ if(id==='menu')requestAnimationFrame(fitStage);
+ try{if(SUBS.includes(id)){if(!(history.state&&history.state.s))history.pushState({s:id},'')}else if(history.state&&history.state.s)history.back()}catch(e){}}
+addEventListener('popstate',()=>{const o=SUBS.find(i=>!$(i).classList.contains('hide'));if(o)show('menu')});
+function fitStage(){const st=$('stage'),sw=$('sw');if(!st||!sw)return;const nm=$('sname'),w=st.clientWidth,h=st.clientHeight-(nm?nm.offsetHeight+4:0);if(w<30||h<30)return;
+ const k=Math.max(.35,Math.min(w/480,h/260));sw.style.width=(480*k).toFixed(1)+'px';sw.style.height=(260*k).toFixed(1)+'px';sw.style.setProperty('--k',k.toFixed(3))}
 function pause(manual){if(net){if(manual&&(state==='play'||state==='ending')){$('restart').classList.toggle('hide',net.role==='guest');show('pause')}return}
 if(state==='play'){state='pause';A.eng(0);$('restart').classList.toggle('hide',ranked);show('pause');mouseDown=fireHeld=false}}
 function resume(){if(net){show(null);return}if(state==='pause'){state='play';show(null)}}
@@ -782,10 +860,15 @@ $('pbtn').onclick=()=>{A.play('click');pause(true)};
 
 /* ===== Online play with a friend (PeerJS, host-authoritative) ===== */
 const PFX='tankwar-maze-';
+const ICE=[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun1.l.google.com:19302'},{urls:'stun:global.stun.twilio.com:3478'},
+ {urls:['turn:eu-0.turn.peerjs.com:3478','turn:us-0.turn.peerjs.com:3478'],username:'peerjs',credential:'peerjsp'},
+ {urls:['turn:openrelay.metered.ca:80','turn:openrelay.metered.ca:443','turn:openrelay.metered.ca:443?transport=tcp'],username:'openrelayproject',credential:'openrelayproject'}];
+const PEERCFG={debug:0,config:{iceServers:ICE,iceCandidatePoolSize:4}};
+function cancelInv(n){const l=n.invited.slice(),code=n.code;n.invited=[];l.forEach(f=>store.get('invite/'+f).then(v=>{if(v&&v.code===code&&P&&v.from===P.u)return store.put('invite/'+f,null)}).catch(()=>{}))}
 const netLive=()=>!!(net&&(net.role==='host'?net.gs.some(g=>g.c.open):net.c&&net.c.open));
 const bc=m=>{if(!net)return;if(net.role==='host')net.gs.forEach(g=>{if(g.c.open)g.c.send(m)});else if(net.c&&net.c.open)net.c.send(m)};
 function ev(...a){if(net&&net.role==='host')net.ev.push(a)}
-function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),3200)}
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),3200)}
 /* ----- voice chat (WebRTC audio mesh between lobby members only) ----- */
 const VO={mic:null,on:false,calls:{},sil:null,keep:false};
 function silentStream(){if(!VO.sil){const ac=new(window.AudioContext||window.webkitAudioContext)();VO.sil=ac.createMediaStreamDestination().stream}return VO.sil}
@@ -809,15 +892,18 @@ async function toggleMic(){
    Object.values(VO.calls).forEach(v=>{const pc=v.call.peerConnection,sd=pc&&pc.getSenders().find(x=>x.track&&x.track.kind==='audio');if(sd)sd.replaceTrack(tr)})}
   catch(e){toast('Mic permission nahi mili');return}}
  VO.mic.getAudioTracks().forEach(t=>t.enabled=true);VO.on=true;updMic()}
-function netClose(){const n=net;net=null;voiceStop();if(!VO.keep)micOff();if(!n)return;try{n.c&&n.c.close()}catch(e){}try{(n.gs||[]).forEach(g=>g.c.close())}catch(e){}try{n.peer&&n.peer.destroy()}catch(e){}}
+function netClose(){const n=net;net=null;voiceStop();if(!VO.keep)micOff();if(!n)return;clearTimeout(n.to);if(n.role==='host'&&n.invited&&n.invited.length)cancelInv(n);try{n.c&&n.c.close()}catch(e){}try{(n.gs||[]).forEach(g=>g.c.close())}catch(e){}try{n.peer&&n.peer.destroy()}catch(e){}}
 const rmsg=m=>{if(m)toast(m)};
 const genCode=()=>Array.from({length:5},()=>'ABCDEFGHJKMNPQRSTUVWXYZ23456789'[Math.random()*31|0]).join('');
 function bcPeers(){if(!net||net.role!=='host'||!net.peer||!net.peer.id)return;const ids=[net.peer.id,...net.gs.filter(g=>g.c.open&&g.pid).map(g=>g.pid)];bc({t:'peers',ids});voiceSync(ids)}
 function onNetClose(g){if(!net)return;if(net.role==='host'){net.gs=net.gs.filter(x=>x!==g);if(g&&g.tank){g.tank.remote=false;g.tank.ai=true}toast(g&&g.kicked?g.name+' was kicked':(g?g.name:'Friend')+' left the lobby');bcPeers();renderLobby();return}toMenu();toast('Host left the room')}
-function hostPeer(code){const peer=new Peer(PFX+code),n={role:'host',peer,c:null,si:0,ev:[],gs:[],code,ban:[]};
- peer.on('open',()=>{n.ready=1;if(n.onopen)n.onopen(code);});
- peer.on('error',e=>{if(n.taking){VO.keep=false;toast('Could not become flagship');return}if(net!==n)return;if(e.type==='unavailable-id'){const cb=n.onopen;createRoom();if(cb&&net)net.onopen=cb}else rmsg('Connection error: '+e.type)});
- peer.on('connection',c=>{if(n.gs.length>=3||state!=='menu'){c.close();return}const g={c,name:'FRIEND',skin:0,pid:''};n.gs.push(g);c.on('data',d=>onData(d,g));c.on('close',()=>{if(net===n)onNetClose(g)})});
+function hostPeer(code){const peer=new Peer(PFX+code,PEERCFG),n={role:'host',peer,c:null,si:0,ev:[],gs:[],code,ban:[],invited:[]};
+ peer.on('open',()=>{n.ready=1;const cb=n.onopen;n.onopen=null;if(cb)cb(code)});
+ peer.on('disconnected',()=>{if(!peer.destroyed&&(net===n||n.taking))setTimeout(()=>{try{if(peer.disconnected&&!peer.destroyed)peer.reconnect()}catch(e){}},700)});
+ peer.on('error',e=>{if(n.taking){VO.keep=false;toast('Could not become flagship');return}if(net!==n)return;if(e.type==='unavailable-id'){const cb=n.onopen;createRoom();if(cb&&net)net.onopen=cb}else if(e.type==='network'||e.type==='server-error'||e.type==='socket-error'){toast('Server se connection toot gaya, dobara jud raha hun...')}else toast('Connection error: '+e.type)});
+ peer.on('connection',c=>{
+  if(n.gs.length>=3||state!=='menu'){const full=n.gs.length>=3,rj=()=>{try{c.send({t:'busy',full})}catch(e){}setTimeout(()=>{try{c.close()}catch(e){}},500)};if(c.open)rj();else c.on('open',rj);return}
+  const g={c,name:'FRIEND',skin:0,pid:''};n.gs.push(g);c.on('data',d=>onData(d,g));c.on('close',()=>{if(net===n)onNetClose(g)})});
  peer.on('call',answerCall);return n}
 function createRoom(){
  if(typeof Peer==='undefined'){toast('Online play ke liye internet chahiye');return}
@@ -826,13 +912,18 @@ function joinRoom(code0){
  const code=String(code0||'').trim().toUpperCase();
  if(typeof Peer==='undefined'){toast('Online play ke liye internet chahiye');return}
  if(code.length<4)return;
- netClose();const peer=new Peer(),n=net={role:'guest',peer,c:null,si:0,lob:[],hlm:3,hmap:0,joined:0};toast('Lobby se connect ho raha hai...');
- peer.on('open',()=>{const c=peer.connect(PFX+code,{serialization:'json'});n.c=c;
-  c.on('open',()=>{if(net!==n)return;n.joined=1;n.psg=P.skin+'.'+P.bl+'.'+P.ms;c.send({t:'hello',name:myName(),skin:P.skin,bl:P.bl,ms:P.ms,pid:peer.id});state='menu';show('menu');renderLobby();toast('Lobby join ho gaya. Host game start karega.')});
-  c.on('data',d=>{if(net===n)onData(d)});c.on('close',()=>{if(net===n)onNetClose()})});
+ netClose();const peer=new Peer(undefined,PEERCFG),n=net={role:'guest',peer,c:null,si:0,lob:[],hlm:3,hmap:0,joined:0,code,tries:0};toast('Lobby se connect ho raha hai...');
+ const attempt=()=>{if(net!==n||n.joined||peer.destroyed)return;n.tries++;try{n.c&&n.c.close()}catch(e){}
+  const c=peer.connect(PFX+code,{serialization:'json',reliable:true});n.c=c;
+  const to=setTimeout(()=>{if(net===n&&!n.joined&&n.c===c&&n.tries<3)attempt()},7000);
+  c.on('open',()=>{if(net!==n||n.c!==c)return;try{c.send({t:'hello',name:myName(),skin:P.skin,bl:P.bl,ms:P.ms,pid:peer.id})}catch(e){}});
+  c.on('data',d=>{if(net===n&&n.c===c)onData(d)});
+  c.on('close',()=>{clearTimeout(to);if(net!==n||n.c!==c)return;if(n.joined)onNetClose();else if(n.tries<3)setTimeout(attempt,1000)})};
+ peer.on('open',attempt);
+ peer.on('disconnected',()=>{if(!peer.destroyed&&net===n)setTimeout(()=>{try{if(peer.disconnected&&!peer.destroyed)peer.reconnect()}catch(e){}},500)});
  peer.on('call',answerCall);
- peer.on('error',e=>{if(net===n&&!n.joined){netClose();renderLobby();toast(e.type==='peer-unavailable'?'Friend ka lobby ab band ho chuka hai':'Connection error: '+e.type)}else if(net===n)toast('Connection error: '+e.type)});
- setTimeout(()=>{if(net===n&&!n.joined){netClose();renderLobby();toast('Lobby join nahi ho saka')}},12000)}
+ peer.on('error',e=>{if(net!==n)return;if(!n.joined){if(e.type==='peer-unavailable'&&n.tries<3){setTimeout(attempt,1500);return}netClose();renderLobby();toast(e.type==='peer-unavailable'?'Friend ka lobby ab band ho chuka hai':'Connection error: '+e.type)}else toast('Connection error: '+e.type)});
+ n.to=setTimeout(()=>{if(net===n&&!n.joined){netClose();renderLobby();toast('Lobby join nahi ho saka. Internet check karo aur dobara try karo.')}},22000)}
 /* flagship = hand the host role to a friend: he opens a new room, everyone moves there */
 function leadFriend(g){if(!net||net.role!=='host'||net.lead||!g.c.open)return;net.lead=g;try{g.c.send({t:'lead'})}catch(e){net.lead=null;return}
  net.leadT=setTimeout(()=>{if(net&&net.lead===g){net.lead=null;toast('Could not hand over the flagship')}},8000);toast(g.name+' is taking over...')}
@@ -850,7 +941,9 @@ function onData(d,g){
  switch(d.t){
   case'hello':if(!g)break;g.name=cleanName(d.name)||'FRIEND';g.skin=Number.isInteger(d.skin)&&SKINS[d.skin]?d.skin:0;g.pid=typeof d.pid==='string'?d.pid.slice(0,80):'';g.bl=Number.isInteger(d.bl)&&BULLETS[d.bl]?d.bl:0;g.ms=Number.isInteger(d.ms)&&MISSILES[d.ms]?d.ms:0;
    if(net.ban&&net.ban.includes(g.name)){net.gs=net.gs.filter(x=>x!==g);try{g.c.send({t:'kick'})}catch(e){}setTimeout(()=>{try{g.c.close()}catch(e){}},250);break}
-   toast(g.name+' lobby mein aa gaya');renderLobby();bcPeers();break;
+   toast(g.name+' lobby mein aa gaya');delete INV[g.name];try{g.c.send({t:'welcome'})}catch(e){}renderLobby();bcPeers();break;
+  case'welcome':if(!g&&net.role==='guest'&&!net.joined){net.joined=1;clearTimeout(net.to);net.psg=P.skin+'.'+P.bl+'.'+P.ms;state='menu';show('menu');renderLobby();toast('Lobby join ho gaya. Host game start karega.')}break;
+  case'busy':if(!g&&net.role==='guest'&&!net.joined){const f=d.full;netClose();renderLobby();toast(f?'Lobby full hai (4 players)':'Host abhi match mein hai. Thodi der baad dobara try karo.')}break;
   case'kick':if(!g&&net.role==='guest'){netClose();state='menu';renderLobby();show('menu');toast('You were kicked from the lobby')}break;
   case'peers':if(!g&&net.role==='guest'&&Array.isArray(d.ids))voiceSync(d.ids.filter(x=>typeof x==='string').slice(0,6));break;
   case'lead':if(!g&&net.role==='guest')takeLead();break;
@@ -926,7 +1019,7 @@ function renderMaps(){const l=$('mapl');l.innerHTML='';
   b.onclick=clk(()=>{mapId=i;try{localStorage.setItem('tw_map',i)}catch(_){}updMapLbl();renderMaps()});l.appendChild(b)})}
 const gl=()=>net&&net.role==='host'?net.gs.filter(g=>g.c.open):[];const hostLive=()=>gl().length>0;
 $('playb').onclick=clk(()=>{if(net&&net.role==='guest'){toast('Host game start karega');return}if(lmode===1&&gl().length>1){toast('1v1 takes only 1 friend. Pick 2v2 or Battle Royale.');return}if(hostLive())startMatch(lmode,false);else{netClose();startMatch(lmode,lmode===3)}});
-document.querySelectorAll('.fs').forEach((e,i)=>e.onclick=clk(()=>{if(e.classList.contains('on'))openFriendPop(i);else openAdd()}));
+document.querySelectorAll('.fs').forEach((e,i)=>e.onclick=clk(()=>{if(e.classList.contains('on'))openFriendPop(i);else slotTap()}));
 document.querySelectorAll('.tab').forEach(b=>b.onclick=clk(()=>{lmode=+b.dataset.m;try{localStorage.setItem('tw_lm',lmode)}catch(e){}renderLobby();$('mpop').classList.add('hide')}));
 let fpg=null;const fpClose=()=>{$('fpop').classList.add('hide');fpg=null};
 function openFriendPop(i){const g=gl()[i];if(!g||state!=='menu')return;fpg=g;$('fpn').textContent=g.name;$('fpop').classList.remove('hide')}
@@ -975,10 +1068,11 @@ function ownL(a,L){const o=(Array.isArray(a)?a:[]).filter(i=>Number.isInteger(i)
 function norm(r){const o=ownL(r.owned,SKINS),ob=ownL(r.ob,BULLETS),om=ownL(r.om,MISSILES),al=[...new Set((Array.isArray(r.alb)?r.alb:[]).map(Number).filter(n=>Number.isInteger(n)&&n>=1))].sort((a,b)=>a-b);
  return{u:String(r.u),salt:r.salt,alg:r.alg,hash:r.hash,ps:Math.max(0,Math.floor(+r.ps)||0),coins:Math.max(0,Math.floor(+r.coins)||0),owned:o,skin:o.includes(r.skin)?r.skin:0,ob,om,bl:ob.includes(r.bl)?r.bl:0,ms:om.includes(r.ms)?r.ms:0,alb:al,sn:Math.max(1,Math.floor(+r.sn)||1),w:Math.max(0,+r.w||0),l:Math.max(0,+r.l||0),created:r.created||0,uid:r.uid?String(r.uid):''}}
 function savePlayer(){if(!P)return;const snap=JSON.stringify(P);
- saving=saving.then(async()=>{try{const r=JSON.parse(snap);await store.put('users/'+r.u,r);await store.put('pub/'+r.u,{ps:r.ps,w:r.w,l:r.l,sn:r.sn})}catch(e){toast('Could not save progress')}})}
+ saving=saving.then(async()=>{const r=JSON.parse(snap);for(let i=0;i<3;i++){if(DEAD.has(r.u))return;try{await store.put('users/'+r.u,r);await store.put('pub/'+r.u,{ps:r.ps,w:r.w,l:r.l,sn:r.sn});return}catch(e){if(i===2)toast('Progress save nahi hua. Internet check karo.');else await new Promise(q=>setTimeout(q,2500))}}})}
+const DEAD=new Set();
 const lmsg=m=>{$('lmsg').textContent=m};
 const cleanUser=v=>String(v||'').trim().toUpperCase();
-function loginOK(rec){P=norm(rec);if(!P.uid){P.uid=rndUid();savePlayer()}store.put('uids/'+P.uid,P.u).catch(()=>{});FR=[];IB=[];PINV=null;prevIB=null;flSig='';try{localStorage.setItem('tw_sess',JSON.stringify({u:P.u,h:P.hash}))}catch(e){}
+function loginOK(rec){loginT=Date.now();P=norm(rec);if(!P.uid){P.uid=rndUid();savePlayer()}store.put('uids/'+P.uid,P.u).catch(()=>{});FR=[];IB=[];PINV=null;prevIB=null;flSig='';try{localStorage.setItem('tw_sess',JSON.stringify({u:P.u,h:P.hash}))}catch(e){}
  $('lp').value='';lmsg('');renderSide();show('menu');checkAbandoned();if(chkCol(P.sn))queueRU({k:'up',t:COL,col:true,n:P.alb.length,s:P.sn,st:rk(P.ps).st});checkSeason();beat();refreshBoard();pollSocial()}
 async function doAuth(reg){
  const u=cleanUser($('lu').value),pw=$('lp').value;
@@ -1003,10 +1097,10 @@ function renderSide(){if(!P)return;const r=rk(P.ps),ti=r.ti,f=Math.min(r.st,ti.s
  $('rku').textContent=P.u;$('lav').textContent=P.u[0];$('lst').textContent='ID '+P.uid+' \u00b7 W '+P.w+' \u00b7 L '+P.l;
  $('rkc').style.setProperty('--tc',ti.c);$('rkn').textContent=ti.n;$('rkp').textContent=f+'/'+ti.s+(r.st>ti.s?' +'+(r.st-ti.s):'');$('rkf').style.width=(100*f/ti.s)+'%';
  const rs=$('rks');rs.innerHTML='';const y=document.createElement('span'),e=document.createElement('i');y.textContent='\u2605'.repeat(f);e.textContent='\u2606'.repeat(ti.s-f);rs.append(y,e);
- $('mcoins').textContent=P.coins;$('scoins').textContent=P.coins;$('sname').textContent=SKINS[P.skin].n+' TANK';$('rki').innerHTML=emblem(r.t,15);$('lalb').innerHTML=P.alb.length?emblem(COL,13)+'<b>\u00d7'+P.alb.length+'</b>':'';renderSea();renderLobby()}
+ $('mcoins').textContent=P.coins;$('scoins').textContent=P.coins;$('sname').textContent=SKINS[P.skin].n+' TANK';$('rki').innerHTML=emblem(r.t,15);$('lalb').innerHTML=P.alb.length?emblem(COL,13)+'<b>\u00d7'+P.alb.length+'</b>':'<small>ALBUM &rsaquo;</small>';renderSea();renderLobby()}
 const guestNow=()=>!!(net&&net.role==='guest'&&net.joined);
 function members(){return guestNow()?(net.lob||[]):gl().map(g=>({name:g.name,skin:g.skin}))}
-function renderLobby(){const gu=guestNow(),fr=hostLive()||gu,lm=gu?(net.hlm||3):lmode;$('rkc').classList.toggle('hide',lm!==3);
+function renderLobby(){const gu=guestNow(),fr=hostLive()||gu,lm=gu?(net.hlm||3):lmode;$('rkc').classList.toggle('hide',lm!==3||fr);
  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('sel',+b.dataset.m===lm));
  const G3=members();document.querySelectorAll('.fs').forEach((e,i)=>{const g=G3[i];e.classList.toggle('on',!!g);e.firstChild.textContent=g?'':'+';e.lastChild.textContent=g?g.name:'INVITE'});
  $('smode').textContent=(lm===3?'BATTLE ROYALE \u00b7 '+(fr?'FRIENDLY':'RANKED'):lm===1?'1v1 DUEL':'2v2 TEAM')+(fr&&lm!==3?' \u00b7 WITH FRIEND':'');
@@ -1041,7 +1135,10 @@ function fillBoard(){const f=$('lbf');f.innerHTML='';
  else if(!board.length)f.textContent='No players yet.';
  else board.slice(0,50).forEach((e,i)=>f.appendChild(lrow(i,e,1)))}
 function openBoard(){fillBoard();renderSea();show('lbs')}
-const beat=()=>{if(P)store.put('online/'+P.u,Date.now()).catch(()=>{})};
+const beat=async()=>{if(!P)return;if(!CLOUD){store.put('online/'+P.u,Date.now()).catch(()=>{});skewOK=true;return}
+ try{const t0=Date.now(),url=CLOUD+'/online/'+P.u+'.json',r=await fetch(url,{method:'PUT',body:'{".sv":"timestamp"}'});if(!r.ok)throw 0;let v=await r.json();const t1=Date.now();
+  if(typeof v!=='number'||v<1e12){const g=await fetch(url);v=await g.json()}
+  if(typeof v==='number'&&v>1e12&&t1-t0<3000){SKEW=v-(t0+t1)/2;skewOK=true}}catch(e){}};
 setInterval(()=>{if(!P)return;beat();if(!$('menu').classList.contains('hide')||!$('lbs').classList.contains('hide'))refreshBoard()},5000);
 addEventListener('storage',e=>{if(e.key==='tw_db'&&P)refreshBoard()});
 addEventListener('pagehide',()=>{if(P)store.put('online/'+P.u,0).catch(()=>{})});
@@ -1113,22 +1210,28 @@ function renderAlbum(){const l=$('albl');l.innerHTML='';const n=P.alb.length,cs=
  P.alb.forEach((q,i)=>{const d=document.createElement('div');d.className='am';d.innerHTML='<div class="amw">'+emblem(COL,92)+'<b class="amn">'+(i+1)+'</b></div><small>SEASON '+q+'</small>';l.appendChild(d)});
  if(!P.alb.includes(cs)){const d=document.createElement('div');d.className='am lock';d.innerHTML='<div class="amw">'+emblem(COL,92)+'<b class="amn">?</b></div><small>SEASON '+cs+'</small><em>'+Math.min(P.ps,need)+'/'+need+' stars</em>';l.appendChild(d)}}
 const rndUid=()=>String(1000000+Math.floor(Math.random()*9000000));
-let FR=[],IB=[],onl={},lastInv=0,PINV=null,prevIB=null,flSig='';
-const isOn=u=>Date.now()-(+onl[u]||0)<20000;
-const getL=async p=>{try{const v=await store.get(p);return Array.isArray(v)?v.filter(Boolean):v&&typeof v==='object'?Object.values(v):[]}catch(e){return[]}};
+let FR=[],IB=[],onl={},lastInv=0,PINV=null,prevIB=null,flSig='',INV={},netOK=true,SKEW=0,skewOK=false;const now=()=>Date.now()+SKEW;
+const isOn=u=>now()-(+onl[u]||0)<20000;
+const toL=v=>Array.isArray(v)?v.filter(Boolean):v&&typeof v==='object'?Object.values(v):[];
+const getL=async p=>{try{return toL(await store.get(p))}catch(e){return[]}};
+const getLx=async p=>toL(await store.get(p));
 function openAdd(){if(!P)return;$('myuid').textContent=P.uid;show('frs')}
 function openInbox(){renderInbox();show('inb');pollSocial()}
 const mkBtn=(t,f,o)=>{const x=document.createElement('button');x.className='btn sm'+(o?' o':'');x.textContent=t;x.onclick=clk(f);return x};
 function updBadge(){const n=IB.length+(PINV?1:0),b=$('ibadge');b.textContent=n;b.classList.toggle('hide',!n)}
 function renderFriendList(force){const b=$('fl');if(!b||!P)return;
- const lob=members().map(g=>g.name);
- const rows=FR.slice().sort((a,c)=>(isOn(c)-isOn(a))||(a<c?-1:1)).map(n=>{const e=board&&board.find(x=>x.u===n);return{n,on:isOn(n),ps:e?e.ps:-1,inL:lob.includes(n)}});
- const sig=JSON.stringify(rows);if(!force&&sig===flSig)return;flSig=sig;b.innerHTML='';
- if(!rows.length){const e=document.createElement('div');e.className='fle';e.textContent='No friends yet. Tap + ADD and enter a friend ID.';b.appendChild(e);return}
+ const lob=members().map(g=>g.name),t0=Date.now();
+ const rows=FR.slice().sort((a,c)=>(isOn(c)-isOn(a))||(a<c?-1:1)).map(n=>{const e=board&&board.find(x=>x.u===n);return{n,on:isOn(n),ps:e?e.ps:-1,inL:lob.includes(n),sent:t0-(INV[n]||0)<15000}});
+ const sig=JSON.stringify([rows,netOK]);if(!force&&sig===flSig)return;flSig=sig;b.innerHTML='';
+ const on=rows.filter(r=>r.on).length,fc=$('fcnt');if(fc){fc.textContent=netOK?(rows.length?on+' ONLINE':''):'OFFLINE';fc.style.color=netOK?'#39ff6a':'#ff5a5a'}
+ if(!rows.length){const e=document.createElement('div');e.className='fle';e.textContent=netOK?'Abhi koi friend nahi. + ADD dabao aur friend ki ID dalo.':'Internet nahi hai. Connection check karo.';b.appendChild(e);return}
  rows.forEach(r=>{const d=document.createElement('div');d.className='fl'+(r.on?'':' off');
-  const o=document.createElement('i');o.className='od';const u=document.createElement('span');u.className='u';u.textContent=r.n;d.append(o,u);
-  if(r.ps>=0){const k=rk(r.ps),t=document.createElement('span');t.className='t';t.style.color=k.ti.c;t.textContent=k.ti.n.slice(0,3)+' '+Math.min(k.st,k.ti.s)+'/'+k.ti.s;d.appendChild(t)}
-  if(r.inL){const x=document.createElement('span');x.className='in';x.textContent='\u2713';d.appendChild(x)}
+  const o=document.createElement('i');o.className='od';const fn=document.createElement('div');fn.className='fn';
+  const u=document.createElement('span');u.className='u';u.textContent=r.n;fn.appendChild(u);
+  if(r.ps>=0){const k=rk(r.ps),t=document.createElement('span');t.className='t';t.style.color=k.ti.c;t.textContent=k.ti.n+' '+Math.min(k.st,k.ti.s)+'/'+k.ti.s;fn.appendChild(t)}
+  d.append(o,fn);
+  if(r.inL){const x=document.createElement('span');x.className='inl';x.textContent='\u2713';d.appendChild(x)}
+  else if(r.sent){const x=document.createElement('span');x.className='sent';x.textContent='SENT';d.appendChild(x)}
   else if(r.on){const x=document.createElement('button');x.className='fi';x.textContent='+';x.title='Invite';x.onclick=clk(()=>inviteFriend(r.n));d.appendChild(x)}
   b.appendChild(d)})}
 function renderInbox(){const b=$('ibox');b.innerHTML='';
@@ -1145,26 +1248,66 @@ async function addFriend(){const v=cleanUser($('fadd').value);if(!v)return;
 async function acceptReq(u){try{IB=IB.filter(x=>x!==u);if(!FR.includes(u))FR=[...FR,u];await store.put('inbox/'+P.u,IB);await store.put('friends/'+P.u,FR);
  const fl=await getL('friends/'+u);if(!fl.includes(P.u))await store.put('friends/'+u,[...fl,P.u]);toast(u+' is now your friend')}catch(e){toast('Connection problem')}renderInbox();renderFriendList(1);updBadge();pollSocial()}
 async function dropReq(u){IB=IB.filter(x=>x!==u);try{await store.put('inbox/'+P.u,IB)}catch(e){}renderInbox();updBadge()}
-function ensureRoom(cb){if(net&&net.role==='host'&&net.ready){cb(net.code);return}if(!net||net.role!=='host')createRoom();if(net&&net.role==='host')net.onopen=cb}
-function inviteFriend(f){if(state!=='menu')return;if(net&&net.role==='guest'){toast('Pehle current lobby chhodo');return}if(gl().length>=3){toast('Lobby full hai (4 players)');return}
- ensureRoom(code=>store.put('invite/'+f,{from:P.u,code,t:Date.now()}).then(()=>toast('Invite '+f+' ko bhej di. Lobby mein hi raho, woh seedha yahin aayega.')).catch(()=>toast('Could not send invite')))}
+function ensureRoom(cb){
+ if(net&&net.role==='host'){const pr=net.peer;
+  if(net.ready&&pr&&!pr.disconnected&&!pr.destroyed){cb(net.code);return}
+  net.onopen=cb;if(pr&&pr.disconnected&&!pr.destroyed){try{pr.reconnect()}catch(e){}}return}
+ createRoom();if(net&&net.role==='host')net.onopen=cb}
+function inviteFriend(f){if(!P||state!=='menu')return;
+ if(!netOK){toast('Internet nahi hai. Connection check karo.');return}
+ if(net&&net.role==='guest'){toast('Pehle current lobby chhodo');return}
+ if(gl().length>=3){toast('Lobby full hai (4 players)');return}
+ if(Date.now()-(INV[f]||0)<15000)return;
+ toast(f+' ko invite bhej raha hun...');
+ ensureRoom(code=>{const n=net;store.put('invite/'+f,{from:P.u,code,t:now()}).then(()=>{INV[f]=Date.now();if(n&&n.invited)n.invited.push(f);toast(f+' ko invite bhej di. Woh seedha lobby mein aa jayega.');renderFriendList(1);setTimeout(()=>renderFriendList(1),15200)}).catch(()=>toast('Invite nahi ja saki. Internet check karo.'))})}
+function slotTap(){if(!FR.length){openAdd();return}
+ const on=FR.filter(f=>isOn(f)&&!members().some(m=>m.name===f));
+ if(!on.length){toast('Abhi koi friend online nahi hai');return}
+ if(on.length===1){inviteFriend(on[0]);return}
+ toast('Friend list mein online friend ke saamne + dabao');const c=$('flc');c.classList.add('flash');setTimeout(()=>c.classList.remove('flash'),900)}
 function joinInvite(iv){if(state!=='menu')return;joinRoom(iv.code)}
 function dropInvite(){PINV=null;if(P)store.put('invite/'+P.u,null).catch(()=>{});updBadge()}
-function showInvite(iv){lastInv=iv.t;$('popt').textContent='LOBBY INVITE';$('popm').textContent=iv.from+' ne tumhe apne lobby mein invite kiya hai.';$('pop').classList.remove('hide');
+function showInvite(iv){lastInv=iv.t;$('popt').textContent='LOBBY INVITE';$('popm').textContent=iv.from+' ne tumhe lobby mein bulaya hai. Abhi tum kisi lobby mein ho, join karne par woh lobby chhoot jayegi.';$('pop').classList.remove('hide');
  $('popn').onclick=clk(()=>{$('pop').classList.add('hide');dropInvite()});
  $('popy').onclick=clk(()=>{$('pop').classList.add('hide');dropInvite();joinInvite(iv)})}
-async function pollSocial(){if(!P)return;try{const[fr,ib,iv,on]=await Promise.all([getL('friends/'+P.u),getL('inbox/'+P.u),store.get('invite/'+P.u),store.get('online')]);
- FR=fr;IB=ib;onl=on||{};PINV=iv&&iv.t&&Date.now()-iv.t<90000?iv:null;
+async function pollSocial(){if(!P)return;try{const[fr,ib,on]=await Promise.all([getLx('friends/'+P.u),getLx('inbox/'+P.u),store.get('online')]);netOK=true;
+ FR=fr;IB=ib;onl=on||{};
  if(state==='menu'){if(prevIB===null){if(IB.length)toast('You have '+IB.length+' friend request(s) in INBOX')}else{const nw=IB.filter(x=>!prevIB.includes(x));if(nw.length)toast(nw[0]+' sent you a friend request. Open INBOX.')}}
- prevIB=IB.slice();updBadge();renderFriendList();if(!$('inb').classList.contains('hide'))renderInbox();
- if(PINV&&PINV.t!==lastInv&&state==='menu'&&$('pop').classList.contains('hide'))showInvite(PINV)}catch(e){}}
+ prevIB=IB.slice();updBadge();renderFriendList();if(!$('inb').classList.contains('hide'))renderInbox();}catch(e){if(netOK){netOK=false;renderFriendList(1)}}}
 setInterval(pollSocial,3000);
+/* ----- invites: friend sends a request, invitee joins the lobby automatically ----- */
+function handleInvite(iv){
+ if(!iv||!iv.t||typeof iv.code!=='string'||!iv.from)return;
+ if(now()-iv.t>120000){dropInvite();return}
+ if(state!=='menu'||iv.t===lastInv)return;
+ if(net&&net.role==='guest'&&(net.code===iv.code||!net.joined)){if(net.code===iv.code){lastInv=iv.t;dropInvite()}return}
+ const busy=(net&&net.role==='host'&&gl().length>0)||(net&&net.role==='guest'&&net.joined);
+ if(busy){if(!$('pop').classList.contains('hide'))return;lastInv=iv.t;PINV=iv;updBadge();showInvite(iv);return}
+ lastInv=iv.t;dropInvite();toast(iv.from+' ke lobby mein ja rahe hain...');joinRoom(iv.code)}
+let pollingInv=false;
+async function pollInvite(){if(!P||pollingInv||(!skewOK&&Date.now()-loginT<4000))return;pollingInv=true;
+ try{const iv=await store.get('invite/'+P.u);handleInvite(iv)}catch(e){}finally{pollingInv=false}}
+let loginT=Date.now();setInterval(pollInvite,1500);
 $('faddb').onclick=clk(addFriend);$('fadd').addEventListener('keydown',e=>{if(e.key==='Enter')addFriend()});$('frback').onclick=clk(()=>show('menu'));
 $('inback').onclick=clk(()=>show('menu'));$('fadd2').onclick=clk(openAdd);$('inbb').onclick=clk(openInbox);
-$('lme').onclick=clk(openAlbum);$('albb').onclick=clk(openAlbum);$('albback').onclick=clk(()=>show('menu'));
+$('lme').onclick=clk(openAlbum);$('albback').onclick=clk(()=>show('menu'));
 document.querySelectorAll('.stb').forEach(b=>b.onclick=clk(()=>{shopTab=+b.dataset.s;renderShop()}));
 $('lgo').onclick=()=>doAuth(false);$('lreg').onclick=()=>doAuth(true);
-[$('lu'),$('lp')].forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter')doAuth(false)}));
+$('lu').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('lp').focus()}});$('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doAuth(false)});
+if(window.ResizeObserver)new ResizeObserver(fitStage).observe($('stage'));addEventListener('resize',fitStage);
+function openDel(){if(!P)return;$('dpw').value='';$('dchk').checked=false;$('dmsg').textContent='';updDel();$('dpop').classList.remove('hide')}
+function updDel(){$('dgo').disabled=!($('dchk').checked&&$('dpw').value.length>=1)}
+async function doDelete(){if(!P)return;const pw=$('dpw').value,u=P.u,uid=P.uid,fr=FR.slice();
+ $('dgo').disabled=true;$('dmsg').textContent='Please wait...';
+ try{const rec=await store.get('users/'+u);
+  if(!rec||await hashPw(pw,rec.salt,rec.alg)!==rec.hash){$('dmsg').textContent='Password galat hai.';updDel();return}
+  DEAD.add(u);await saving;
+  for(const f of fr){try{const fl=await getLx('friends/'+f);if(fl.includes(u))await store.put('friends/'+f,fl.filter(x=>x!==u))}catch(e){}}
+  for(const p of ['users/'+u,'pub/'+u,'uids/'+uid,'online/'+u,'friends/'+u,'inbox/'+u,'invite/'+u])await store.put(p,null);
+  $('dpop').classList.add('hide');try{localStorage.removeItem('tw_sess');localStorage.removeItem('tw_pend')}catch(e){}
+  netClose();P=null;FR=[];IB=[];PINV=null;prevIB=null;flSig='';$('fl').innerHTML='';state='menu';$('lu').value='';$('lp').value='';lmsg('');show('login');toast('Account delete ho gaya.')
+ }catch(e){DEAD.delete(u);$('dmsg').textContent='Connection problem. Account delete nahi hua, dobara try karo.';updDel()}}
+$('delb').onclick=clk(openDel);$('dno').onclick=clk(()=>$('dpop').classList.add('hide'));$('dchk').onchange=updDel;$('dpw').oninput=updDel;$('dgo').onclick=clk(doDelete);
 $('lout').onclick=clk(logout);$('lbm').onclick=clk(openBoard);$('lbback').onclick=clk(()=>show('menu'));
 $('shopb').onclick=clk(()=>{renderShop();show('shop')});$('shback').onclick=clk(()=>show('menu'));
 $('lnote').textContent=CLOUD?'Online accounts and leaderboard.':'OFFLINE MODE: accounts/friends sirf is browser mein hain. Dusre device ke liye CLOUD URL set karo.';if(!CLOUD)$('lnote').style.color='#ff8a1f';
