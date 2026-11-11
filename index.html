@@ -238,15 +238,6 @@ body.touch #pbtn{padding:calc(5px*var(--u)) calc(12px*var(--u))}
 .am.kr small{color:#ff5a66}.am.kr .amn{color:#fff;text-shadow:0 1px 3px #000}
 .am.kr.lock{box-shadow:none}
 .rua.kr{color:#ff5a66;border-color:#c4161c;background:rgba(168,16,31,.2);text-shadow:0 0 12px #c4161c}
-.lr.kr{position:relative;isolation:isolate;border:1px solid #b3121e;background:linear-gradient(90deg,rgba(110,0,12,.45),rgba(0,0,0,.35))!important;box-shadow:0 0 10px rgba(210,26,44,.7)}
-.lr.kr::before,.lr.kr::after{content:'';position:absolute;pointer-events:none;z-index:-1;border-radius:14px;filter:blur(6px)}
-.lr.kr::before{inset:-6px -4px;background:radial-gradient(ellipse at 12% 100%,rgba(200,16,32,.8),transparent 48%),radial-gradient(ellipse at 55% 0%,rgba(140,8,22,.7),transparent 52%),radial-gradient(ellipse at 94% 100%,rgba(225,32,48,.65),transparent 46%);animation:krSmoke 3.4s ease-in-out infinite alternate}
-.lr.kr::after{inset:-8px -2px;background:radial-gradient(ellipse at 30% 0%,rgba(170,10,26,.6),transparent 50%),radial-gradient(ellipse at 78% 20%,rgba(215,28,44,.5),transparent 48%);animation:krSmoke2 4.6s ease-in-out infinite alternate}
-.lr.kr .u{text-shadow:0 0 8px rgba(232,40,60,.75)}
-#lbf .lr.kr::after{display:none}
-@keyframes krSmoke{0%{transform:translate(-3px,3px) scale(1,.92);opacity:.5}50%{transform:translate(2px,-3px) scale(1.04,1.18);opacity:1}100%{transform:translate(4px,0) scale(.97,1.06);opacity:.62}}
-@keyframes krSmoke2{0%{transform:translate(4px,-2px) scale(1.02,1);opacity:.85}50%{transform:translate(-4px,-5px) scale(1.06,1.25);opacity:.45}100%{transform:translate(0,2px) scale(.98,1.05);opacity:.8}}
-@media (prefers-reduced-motion:reduce){.lr.kr,.lr.kr::before,.lr.kr::after{animation:none}}
 /* ===== v5: colonel, album, season, shop tabs, rank-up animation ===== */
 #rki{width:auto!important;height:auto!important;background:none!important;clip-path:none!important;line-height:0}
 #rki svg{display:block;width:18px;height:auto}
@@ -354,6 +345,42 @@ html,body{overscroll-behavior:none}
 #dgo{border-color:#ff3a3a;background:linear-gradient(#7a1a1a,#3a0a0a)}
 .dng{border-color:#ff5a5a!important;color:#ff9a8f!important}
 .scr:not(#menu):not(#login):not(#end):not(#pause)>.btn.o:last-child{position:sticky;bottom:4px;z-index:3;flex:none}
+
+/* ===== v7: kernal smoke, friend cards, whatsapp login/reset, responsive polish ===== */
+.lr.kr{position:relative;border:1px solid #d1202e;background:linear-gradient(90deg,rgba(125,0,16,.6),rgba(0,0,0,.4))!important;box-shadow:0 0 12px rgba(225,32,48,.8),inset 0 0 8px rgba(165,0,18,.55);animation:krGlow 2.2s ease-in-out infinite alternate}
+.lr.kr>.n,.lr.kr>.u,.lr.kr>.t{position:relative;z-index:1}
+.lr.kr .u{color:#ffd6d9;text-shadow:0 0 8px rgba(240,44,62,.9)}
+@keyframes krGlow{from{box-shadow:0 0 5px rgba(225,32,48,.5),inset 0 0 5px rgba(165,0,18,.4)}to{box-shadow:0 0 17px rgba(245,44,60,1),inset 0 0 11px rgba(195,10,26,.65)}}
+.ksm{position:absolute;inset:0;pointer-events:none;z-index:0}
+.ksm i{position:absolute;bottom:30%;width:26px;height:26px;margin-left:-13px;border-radius:50%;background:radial-gradient(circle,rgba(240,36,54,.95) 0,rgba(155,0,20,.6) 45%,rgba(90,0,10,0) 72%);filter:blur(4px);opacity:0;animation:ksUp 2.8s ease-out infinite;will-change:transform,opacity}
+.ksm i:nth-child(1){left:10%}
+.ksm i:nth-child(2){left:34%;width:32px;height:32px;animation-delay:.7s}
+.ksm i:nth-child(3){left:60%;animation-delay:1.4s}
+.ksm i:nth-child(4){left:84%;width:30px;height:30px;animation-delay:2.1s}
+@keyframes ksUp{0%{opacity:0;transform:translate(0,8px) scale(.5)}25%{opacity:.95}100%{opacity:0;transform:translate(10px,-34px) scale(2)}}
+#fl{gap:5px}
+.fl{border:1.5px solid rgba(57,255,106,.5);background:rgba(0,0,0,.42);border-radius:8px;cursor:pointer;transition:border-color .15s,background .15s}
+.fl:hover,.fl:active{border-color:#39ff6a;background:rgba(57,255,106,.1)}
+.fl.off{border-color:rgba(255,255,255,.2)}
+.fl.star{border-color:#ffd24a;background:rgba(255,210,74,.08);box-shadow:0 0 8px rgba(255,210,74,.35)}
+.fl.star .u{color:#ffe27a}
+#fmpop{position:fixed;inset:0;z-index:306;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.68)}
+#fmpop .card{text-align:center;padding:14px 18px;width:min(320px,90vw);display:flex;flex-direction:column;gap:9px;align-items:center;max-height:96vh;overflow:auto}
+#fmn{font-size:17px!important;margin:0!important;color:#39ff6a!important;word-break:break-all}
+.fmb{display:flex;flex-direction:column;gap:8px;width:100%}.fmb .btn{width:100%;min-width:0}
+.btn.gold{border-color:#ffd24a;color:#ffe27a}
+#login .forgb{position:absolute;left:calc(10px + env(safe-area-inset-left));bottom:calc(8px + env(safe-area-inset-bottom));margin:0!important;min-width:0;border-color:#6fb8ff;color:#bfe0ff}
+#login #lnote{padding:0 150px}
+#lwa{text-transform:none}
+.in::placeholder{letter-spacing:1px;color:#6f8a6f;font-size:13px}
+#rst .lin .in{width:min(320px,80vw)}
+#bpop{position:fixed;inset:0;z-index:320;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.84);font:13px system-ui}
+#bpop .card{text-align:center;padding:14px 18px;width:min(400px,92vw);max-height:96vh;overflow:auto;display:flex;flex-direction:column;gap:9px;align-items:center;border-color:#25d366;box-shadow:0 0 26px #25d36655}
+.scr,#mpop .card,#fpop .card,#fmpop .card,#dpop .card,#bpop .card,#pop .card{zoom:var(--zm,1)}
+@media (max-width:700px){#lbr .lr .n,.lcol .lr .n{width:15px;font-size:9px}#lbr .lr .t,.lcol .lr .t{font-size:9px;letter-spacing:0}.fl .t{font-size:8px}.lcol .lr{gap:3px}}
+@media (max-height:420px){#fmpop .card,#bpop .card{padding:8px 12px;gap:6px}#fmpop .btn,#bpop .btn{padding:5px 10px;font-size:12px}#bpop .p{font-size:11px}#rst{gap:6px}#rst .lin{display:grid;grid-template-columns:1fr 1fr;gap:6px}#rst .lin .in{width:min(230px,42vw)}}
+.brow .btn{font-size:clamp(14px,3.4vh,20px);letter-spacing:1px;padding-left:6px;padding-right:6px}
+#bgo{border-color:#25d366;background:linear-gradient(#1c6b3a,#0d3a1f)}
 </style></head><body>
 <canvas id="c"></canvas>
 <div id="hud" class="hide"><div id="tl"></div><div id="tc"><span id="mode"></span><span id="timer">0:00</span><button id="micg" class="micb hudmic mute hide" aria-label="Mic"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-3.1A7 7 0 0 0 19 11z" fill="currentColor"/><path class="sl" d="M4 4l16 16" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button><button id="pbtn">II</button></div><div id="tr"></div></div>
@@ -379,10 +406,22 @@ html,body{overscroll-behavior:none}
 
 <div class="scr" id="login"><h1>TANK WAR<small>MAZE BATTLE</small></h1>
 <div class="lin"><input class="in" id="lu" maxlength="10" placeholder="USERNAME" autocomplete="username" autocapitalize="off" spellcheck="false">
-<input class="in" id="lp" type="password" maxlength="32" placeholder="PASSWORD" autocomplete="current-password"></div>
-<div class="brow"><button class="btn" id="lgo">LOGIN</button><button class="btn o" id="lreg">CREATE ACCOUNT</button></div>
+<input class="in" id="lp" type="password" maxlength="32" placeholder="PASSWORD" autocomplete="current-password">
+<input class="in hide" id="lwa" type="tel" inputmode="tel" maxlength="18" placeholder="WHATSAPP NUMBER" autocomplete="tel"></div>
+<div class="brow"><button class="btn" id="lgo">LOGIN</button><button class="btn o hide" id="lback">BACK</button><button class="btn o" id="lreg">CREATE ACCOUNT</button></div>
 <div class="p" id="lmsg" style="margin:0;min-height:20px;color:#ffb040"></div><div class="p" id="lnote" style="margin:0;font-size:12px"></div>
+<button class="btn o sm forgb" id="forgb">FORGOT PASSWORD?</button>
 <button class="btn o sm ib hide instb">INSTALL APP</button></div>
+
+<div class="scr hide" id="rst"><h2>RESET PASSWORD</h2>
+<div class="p" style="margin:0;font-size:13px">Apna username aur account se bind <b>WhatsApp number</b> dalo, phir naya password set karo.</div>
+<div class="lin"><input class="in" id="ru" maxlength="10" placeholder="USERNAME" autocapitalize="off" spellcheck="false">
+<input class="in" id="rw" type="tel" inputmode="tel" maxlength="18" placeholder="WHATSAPP NUMBER" style="text-transform:none">
+<input class="in" id="rp" type="password" maxlength="32" placeholder="NEW PASSWORD" autocomplete="new-password">
+<input class="in" id="rp2" type="password" maxlength="32" placeholder="CONFIRM PASSWORD" autocomplete="new-password"></div>
+<div class="p" id="rmsg" style="margin:0;min-height:18px;color:#ffb040"></div>
+<button class="btn o sm hide" id="radm">WHATSAPP PAR ADMIN SE BAAT KARO</button>
+<div class="brow"><button class="btn" id="rgo">RESET PASSWORD</button><button class="btn o" id="rback">BACK</button></div></div>
 
 <div class="scr hide" id="shop"><h2>SHOP <span class="cn" style="font-size:18px"><i></i><b id="scoins">0</b></span></h2><div class="p" style="margin:0">Win a match = +100 coins. Tanks, bullets aur missiles ke apne fayde aur nuksan hain.</div><div id="stabs"><button class="stb sel" data-s="0">TANKS</button><button class="stb" data-s="1">BULLETS</button><button class="stb" data-s="2">MISSILES</button></div><div id="skl"></div><button class="btn o" id="shback">BACK</button></div>
 
@@ -427,6 +466,13 @@ Bullets: 10 dmg. Missile: 35 direct + 15 splash (65 px radius). Walls block ever
 <input class="in" id="dpw" type="password" maxlength="32" placeholder="PASSWORD DALO" autocomplete="current-password" style="width:min(260px,80%)">
 <div class="p" id="dmsg" style="margin:0;min-height:16px;color:#ffb040;font-size:12px"></div>
 <div style="display:flex;gap:8px"><button class="btn sm" id="dgo" disabled style="min-width:0">DELETE FOREVER</button><button class="btn o sm" id="dno" style="min-width:0">CANCEL</button></div></div></div>
+<div id="bpop" class="hide"><div class="card"><b class="ct" style="color:#25d366;font-size:16px;margin:0">WHATSAPP BIND KARO</b>
+<div class="p" style="margin:0;font-size:13px">Apne account ke saath WhatsApp number bind karo. Password bhool jao to isi number se reset hoga. Country code ke sath likho (jaise 923001234567).</div>
+<input class="in" id="bwa" type="tel" inputmode="tel" maxlength="18" placeholder="WHATSAPP NUMBER" style="text-transform:none;width:min(260px,80%)">
+<div class="p" id="bmsg" style="margin:0;min-height:16px;color:#ffb040;font-size:12px"></div>
+<div style="display:flex;gap:8px"><button class="btn sm" id="bgo" style="min-width:0">BIND ACCOUNT</button><button class="btn o sm" id="bout" style="min-width:0">LOGOUT</button></div></div></div>
+<div id="fmpop" class="hide"><div class="card"><b class="ct" id="fmn"></b><div class="p" id="fmr" style="margin:0;font-size:12px"></div><div class="p" id="fmq" style="margin:0;font-size:12px;color:#ffc9c2;min-height:0"></div>
+<div class="fmb"><button class="btn sm gold" id="fms">SET AS STAR FRIEND</button><button class="btn o sm dng" id="fmd">DELETE FRIEND</button></div><button class="btn o sm" id="fmc" style="min-width:100px">CANCEL</button></div></div>
 <div id="pop" class="hide"><div class="card"><b class="ct" id="popt"></b><div class="p" id="popm" style="margin:0"></div><div style="display:flex;gap:8px"><button class="btn sm" id="popy" style="min-width:0">ACCEPT</button><button class="btn o sm" id="popn" style="min-width:0">REJECT</button></div></div></div>
 <div class="scr hide" id="alb"><h2>MEDAL ALBUM</h2><div class="p" id="albs" style="margin:0"></div><div id="albl"></div><button class="btn o" id="albback">BACK</button></div>
 <div id="rup" class="hide"><div id="rupg"></div><div id="rupr"></div><canvas id="rupc"></canvas><div id="rupf"></div><div id="rupbox"></div><div id="rupx">TAP TO CONTINUE</div></div>
@@ -488,17 +534,46 @@ const save=()=>{try{localStorage.setItem('tankwar',JSON.stringify(S))}catch(e){}
 const A={ctx:null,music:false,last:{},
  init(){ if(this.ctx){if(this.ctx.state==='suspended')this.ctx.resume();return}
   try{const c=this.ctx=new(window.AudioContext||window.webkitAudioContext)();
-   this.m=c.createGain();this.s=c.createGain();this.m.connect(c.destination);this.s.connect(c.destination);
+   this.m=c.createGain();this.s=c.createGain();this.m.connect(c.destination);this.s.connect(c.destination);this.tg=c.createGain();this.tg.gain.value=1.7;this.tg.connect(this.m);
    const b=this.nb=c.createBuffer(1,c.sampleRate,c.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
    this.eo=c.createOscillator();this.eo.type='sawtooth';this.eo.frequency.value=40;this.eg=c.createGain();this.eg.gain.value=0;
    const f=c.createBiquadFilter();f.frequency.value=200;this.eo.connect(f);f.connect(this.eg);this.eg.connect(this.s);this.eo.start();
    this.vol();let st=0;const bass=[55,55,65.4,55,73.4,55,65.4,49];
    setInterval(()=>{if(!this.music||!S.snd||c.state!=='running')return;st++;this.tone(bass[st%8],.22,'sawtooth',.3,0,this.m);if(st%2)this.noise(.04,.12,7000,this.m);if(st%4===0)this.tone(110,.1,'sine',.5,-60,this.m)},240);
+   setInterval(()=>this.title(),60);
   }catch(e){}},
  vol(){if(!this.ctx)return;this.m.gain.value=S.snd?S.mus*.22:0;this.s.gain.value=S.snd?S.sfx:0},
  tone(f,d,type,v,sl,dest){const c=this.ctx;if(!c)return;const o=c.createOscillator(),g=c.createGain(),t=c.currentTime;o.type=type;o.frequency.setValueAtTime(f,t);if(sl)o.frequency.linearRampToValueAtTime(Math.max(20,f+sl),t+d);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(dest||this.s);o.start(t);o.stop(t+d+.02)},
  noise(d,v,fc,dest){const c=this.ctx;if(!c)return;const s=c.createBufferSource(),g=c.createGain(),f=c.createBiquadFilter(),t=c.currentTime;s.buffer=this.nb;f.type='lowpass';f.frequency.value=fc;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+d);s.connect(f);f.connect(g);g.connect(dest||this.s);s.start(t);s.stop(t+d)},
  eng(v){if(this.eg){this.eg.gain.value=S.snd?v*.07:0;this.eo.frequency.value=38+v*28}},
+ /* ---- war title theme (menu / login): march snare, timpani, brass theme in D minor, distant artillery ---- */
+ tStep:0,tNext:0,off:0,
+ mf(m){return 440*Math.pow(2,(m-69)/12)},
+ t2(f,d,type,v,at,lp,att){const c=this.ctx,o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(f,at);
+  if(lp){const q=c.createBiquadFilter();q.type='lowpass';q.frequency.value=lp;o.connect(q);q.connect(g)}else o.connect(g);
+  g.gain.setValueAtTime(.0001,at);g.gain.linearRampToValueAtTime(v,at+(att||.01));g.gain.exponentialRampToValueAtTime(.0001,at+d);g.connect(this.tg);o.start(at);o.stop(at+d+.05)},
+ n2(d,v,fc,at,type,q){const c=this.ctx,s=c.createBufferSource(),g=c.createGain(),f=c.createBiquadFilter();s.buffer=this.nb;s.loop=true;f.type=type||'lowpass';f.frequency.value=fc;if(q)f.Q.value=q;
+  g.gain.setValueAtTime(v,at);g.gain.exponentialRampToValueAtTime(.0001,at+d);s.connect(f);f.connect(g);g.connect(this.tg);s.start(at);s.stop(at+d+.05)},
+ sweep(f0,f1,d,v,at){const c=this.ctx,o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(f0,at);o.frequency.exponentialRampToValueAtTime(f1,at+d*.6);
+  g.gain.setValueAtTime(v,at);g.gain.exponentialRampToValueAtTime(.0001,at+d);o.connect(g);g.connect(this.tg);o.start(at);o.stop(at+d+.05)},
+ title(){const c=this.ctx;if(!c)return;
+  const ok=S.snd&&c.state==='running'&&!this.music&&state==='menu'&&!document.hidden;
+  if(!ok){if(!this.off){this.off=1;this.tg.gain.cancelScheduledValues(c.currentTime);this.tg.gain.setTargetAtTime(0,c.currentTime,.12)}this.tNext=0;this.tStep=0;return}
+  if(this.off){this.off=0;this.tg.gain.cancelScheduledValues(c.currentTime);this.tg.gain.setTargetAtTime(1.7,c.currentTime,.05)}
+  const sp=60/78/4;if(!this.tNext||this.tNext<c.currentTime-.2)this.tNext=c.currentTime+.08;
+  while(this.tNext<c.currentTime+.3){this.tstep(this.tStep++,this.tNext,sp);this.tNext+=sp}},
+ tstep(i,t,sp){const bar=(i>>4)&7,s=i&15,R=[38,38,34,34,31,31,33,33][bar];
+  if(s===0){this.t2(this.mf(R),sp*16,'sawtooth',.16,t,240,.6);this.t2(this.mf(R-12),sp*16,'sine',.22,t,200,.4);this.t2(this.mf(R+7),sp*16,'sawtooth',.06,t,300,.8)}
+  if(s===0||s===8)this.sweep(130,46,.32,.5,t);
+  if(s===0||s===10)this.sweep(86,50,.7,.55,t);
+  const sn=bar===7?(s>=8?.08+(s-8)*.035:0):[0,0,.08,0,.3,0,0,.08,0,0,.1,0,.3,0,.12,.14][s];
+  if(sn){this.n2(.1,sn,2600,t,'bandpass',.9);this.sweep(200,150,.08,sn*.5,t)}
+  if(s===8&&bar%4===3){this.n2(1.8,.3,170,t);this.sweep(60,32,1.5,.5,t)}
+  if(bar===7&&s===15){this.n2(1.2,.4,260,t+sp);this.sweep(80,34,1.4,.6,t+sp)}
+  const H=[[[0,62,6],[6,65,2],[8,69,6],[14,67,2]],[[0,65,8],[8,64,4],[12,62,4]],[[0,62,6],[6,65,2],[8,70,6],[14,69,2]],[[0,67,8],[8,65,8]],
+   [[0,70,6],[6,69,2],[8,67,4],[12,65,4]],[[0,67,8],[8,62,8]],[[0,69,4],[4,73,4],[8,74,6],[14,73,2]],[[0,69,12]]][bar];
+  for(const h of H)if(h[0]===s){const f=this.mf(h[1]),d=h[2]*sp;this.t2(f,d,'sawtooth',.15,t,1100,.09);this.t2(f*1.004,d,'sawtooth',.1,t,900,.12);this.t2(f/2,d,'square',.05,t,500,.1)}
+ },
  play(n){if(!this.ctx||!S.snd)return;const now=performance.now();if(this.last[n]&&now-this.last[n]<(n==='boom'?120:50))return;this.last[n]=now;
   switch(n){
    case'shoot':this.tone(240,.12,'square',.16,-150);this.noise(.06,.12,2500);break;
@@ -845,7 +920,8 @@ function resize(){dpr=Math.min(devicePixelRatio||1,2);cv.width=innerWidth*dpr;cv
  z=COARSE?Math.max(.4,Math.min(1,base*.85)):Math.max(.55,Math.min(1.3,base));
  /* touch buttons / HUD shrink on small screens */
  const u=COARSE?Math.max(.55,Math.min(1.1,Math.min(innerWidth,innerHeight)/430)):1;
- document.documentElement.style.setProperty('--u',u.toFixed(3))}
+ document.documentElement.style.setProperty('--u',u.toFixed(3));
+ const zf=Math.max(1,Math.min(2.2,Math.min(innerWidth/1100,innerHeight/640)));document.documentElement.style.setProperty('--zm',zf.toFixed(3));requestAnimationFrame(fitStage)}
 let mAcc=0;
 function loop(ts){const dt=Math.min(.05,(ts-last)/1000||0);last=ts;
  if(state==='menu'||(state==='end'&&!mazeCv)){mAcc+=dt;if(mAcc>=.028){menuAnim(Math.min(.05,mAcc));mAcc=0}}else{mAcc=0;update(dt);render()}requestAnimationFrame(loop)}
@@ -1109,22 +1185,23 @@ async function hashPw(pw,salt,alg){
 function rndHex(n){const a=new Uint8Array(n);if(window.crypto&&crypto.getRandomValues)crypto.getRandomValues(a);else for(let i=0;i<n;i++)a[i]=Math.random()*256;return hex(a)}
 function ownL(a,L){const o=(Array.isArray(a)?a:[]).filter(i=>Number.isInteger(i)&&L[i]);if(!o.includes(0))o.push(0);return o}
 function norm(r){const o=ownL(r.owned,SKINS),ob=ownL(r.ob,BULLETS),om=ownL(r.om,MISSILES),al=[...new Set((Array.isArray(r.alb)?r.alb:[]).map(Number).filter(n=>Number.isInteger(n)&&n>=1))].sort((a,b)=>a-b),kl=[...new Set((Array.isArray(r.kalb)?r.kalb:[]).map(Number).filter(n=>Number.isInteger(n)&&n>=1))].sort((a,b)=>a-b);
- return{u:String(r.u),salt:r.salt,alg:r.alg,hash:r.hash,ps:Math.max(0,Math.floor(+r.ps)||0),coins:Math.max(0,Math.floor(+r.coins)||0),owned:o,skin:o.includes(r.skin)?r.skin:0,ob,om,bl:ob.includes(r.bl)?r.bl:0,ms:om.includes(r.ms)?r.ms:0,alb:al,kalb:kl,sn:Math.max(1,Math.floor(+r.sn)||1),w:Math.max(0,+r.w||0),l:Math.max(0,+r.l||0),created:r.created||0,uid:r.uid?String(r.uid):''}}
+ return{u:String(r.u),salt:r.salt,alg:r.alg,hash:r.hash,ps:Math.max(0,Math.floor(+r.ps)||0),coins:Math.max(0,Math.floor(+r.coins)||0),owned:o,skin:o.includes(r.skin)?r.skin:0,ob,om,bl:ob.includes(r.bl)?r.bl:0,ms:om.includes(r.ms)?r.ms:0,alb:al,kalb:kl,sn:Math.max(1,Math.floor(+r.sn)||1),w:Math.max(0,+r.w||0),l:Math.max(0,+r.l||0),created:r.created||0,uid:r.uid?String(r.uid):'',wah:r.wah?String(r.wah):'',sf:[...new Set((Array.isArray(r.sf)?r.sf:[]).map(String))]}}
 function savePlayer(){if(!P)return;const snap=JSON.stringify(P);
  saving=saving.then(async()=>{const r=JSON.parse(snap);for(let i=0;i<3;i++){if(DEAD.has(r.u))return;try{await store.put('users/'+r.u,r);await store.put('pub/'+r.u,{ps:r.ps,w:r.w,l:r.l,sn:r.sn});return}catch(e){if(i===2)toast('Progress save nahi hua. Internet check karo.');else await new Promise(q=>setTimeout(q,2500))}}})}
 const DEAD=new Set();
 const lmsg=m=>{$('lmsg').textContent=m};
 const cleanUser=v=>String(v||'').trim().toUpperCase();
 function loginOK(rec){loginT=Date.now();P=norm(rec);if(!P.uid){P.uid=rndUid();savePlayer()}store.put('uids/'+P.uid,P.u).catch(()=>{});FR=[];IB=[];PINV=null;prevIB=null;flSig='';try{localStorage.setItem('tw_sess',JSON.stringify({u:P.u,h:P.hash}))}catch(e){}
- $('lp').value='';lmsg('');renderSide();show('menu');checkAbandoned();if(chkCol(P.sn))queueRU({k:'up',t:COL,col:true,n:P.alb.length,s:P.sn,st:rk(P.ps).st});else if(chkKer(P.sn))queueRU({k:'up',t:KER,ker:true,n:P.kalb.length,s:P.sn,st:Math.min(rk(P.ps).st,TIERS[KER].s)});checkSeason();beat();refreshBoard();pollSocial()}
+ $('lp').value='';lmsg('');renderSide();show('menu');checkAbandoned();if(chkCol(P.sn))queueRU({k:'up',t:COL,col:true,n:P.alb.length,s:P.sn,st:rk(P.ps).st});else if(chkKer(P.sn))queueRU({k:'up',t:KER,ker:true,n:P.kalb.length,s:P.sn,st:Math.min(rk(P.ps).st,TIERS[KER].s)});checkSeason();beat();refreshBoard();pollSocial();needBind()}
 async function doAuth(reg){
  const u=cleanUser($('lu').value),pw=$('lp').value;
  if(!/^[A-Z0-9_]{3,10}$/.test(u)){lmsg('Username: 3-10 letters, numbers or _');return}
  if(pw.length<4){lmsg('Password must be at least 4 characters');return}
+ let wa='';if(reg){wa=normWA($('lwa').value);if(!wa){lmsg('WhatsApp number sahi dalo (country code ke sath, jaise 923001234567)');return}}
  const bs=[$('lgo'),$('lreg')];bs.forEach(b=>b.disabled=true);lmsg('Please wait...');
  try{
-  if(reg){const salt=rndHex(16),alg=canSub()?'p':'w',hash=await hashPw(pw,salt,alg);
-   const rec={u,uid:rndUid(),salt,alg,hash,ps:0,coins:0,owned:[0],skin:0,ob:[0],om:[0],bl:0,ms:0,alb:[],kalb:[],sn:curSeason(),w:0,l:0,created:Date.now()};
+  if(reg){const salt=rndHex(16),alg=canSub()?'p':'w',hash=await hashPw(pw,salt,alg),wah=await hashPw('wa:'+wa,salt,alg);
+   const rec={u,uid:rndUid(),salt,alg,hash,wah,ps:0,coins:0,owned:[0],skin:0,ob:[0],om:[0],bl:0,ms:0,alb:[],kalb:[],sn:curSeason(),w:0,l:0,created:Date.now()};
    if(!await store.put('users/'+u,rec,true)){lmsg('That username is already taken');return}
    await store.put('pub/'+u,{ps:0,w:0,l:0,sn:curSeason()});loginOK(rec)}
   else{let rec=await store.get('users/'+u);
@@ -1133,7 +1210,7 @@ async function doAuth(reg){
    if(await hashPw(pw,rec.salt,rec.alg)!==rec.hash){lmsg('Wrong password');return}loginOK(rec)}
  }catch(e){lmsg(e.message==='nosub'?'This account needs a secure (https) page to log in':'Connection problem. Try again.')}
  finally{bs.forEach(b=>b.disabled=false)}}
-function logout(){FR=[];IB=[];PINV=null;prevIB=null;flSig='';$('fl').innerHTML='';$('pop').classList.add('hide');if(P)store.put('online/'+P.u,0).catch(()=>{});try{localStorage.removeItem('tw_sess')}catch(e){}netClose();P=null;state='menu';$('lu').value='';lmsg('');show('login')}
+function logout(){FR=[];IB=[];PINV=null;prevIB=null;flSig='';$('fl').innerHTML='';$('pop').classList.add('hide');$('bpop').classList.add('hide');$('fmpop').classList.add('hide');if(P)store.put('online/'+P.u,0).catch(()=>{});try{localStorage.removeItem('tw_sess')}catch(e){}netClose();P=null;state='menu';$('lu').value='';lmsg('');setReg(false);show('login')}
 async function resumeSession(){
  try{const s=JSON.parse(localStorage.getItem('tw_sess')||'null');if(!s)return;const rec=await store.get('users/'+s.u);if(rec&&rec.hash===s.h)loginOK(rec)}catch(e){}}
 function renderSide(){if(!P)return;const r=rk(P.ps),ti=r.ti,f=Math.min(r.st,ti.s);
@@ -1155,7 +1232,7 @@ function renderLobby(){const gu=guestNow(),fr=hostLive()||gu,lm=gu?(net.hlm||3):
  renderFriendList()}
 let _sb=null;
 function stageBg(){if(!_sb){_sb=document.createElement('canvas');_sb.width=480;_sb.height=260;const c=_sb.getContext('2d');
- const g=c.createRadialGradient(240,190,10,240,190,170);g.addColorStop(0,'rgba(255,138,31,.45)');g.addColorStop(1,'rgba(255,138,31,0)');c.fillStyle=g;c.fillRect(0,0,480,260);
+ c.save();c.translate(240,175);c.scale(1.9,1);const g=c.createRadialGradient(0,0,6,0,0,85);g.addColorStop(0,'rgba(255,138,31,.45)');g.addColorStop(1,'rgba(255,138,31,0)');c.fillStyle=g;c.fillRect(-130,-175,260,260);c.restore();
  c.fillStyle='rgba(0,0,0,.4)';c.beginPath();c.ellipse(240,205,115,22,0,0,6.283);c.fill();c.strokeStyle='#ffb040';c.lineWidth=3;c.stroke()}return _sb}
 function stageDraw(){const c=$('lstage').getContext('2d'),t=performance.now()/1000;c.clearRect(0,0,480,260);c.drawImage(stageBg(),0,0);
  const tk=(x,y,sc,a,sk)=>{c.save();c.translate(x,y);c.scale(sc,sc);drawTank({x:0,y:0,a,ta:a+Math.sin(t*.8)*.5,skin:sk,team:0,tread:t*20,rec:0,dead:0},c);c.restore()};
@@ -1164,7 +1241,7 @@ function stageDraw(){const c=$('lstage').getContext('2d'),t=performance.now()/10
 function lrow(i,e,full){const r=rk(e.ps),d=document.createElement('div');d.className='lr'+(P&&e.u===P.u?' me':'')+(r.t===KER?' kr':'');
  const n=document.createElement('span'),u=document.createElement('span'),t=document.createElement('span');n.className='n';u.className='u';t.className='t';
  n.textContent='#'+(i+1);u.textContent=e.u;if(e.on){const o=document.createElement('i');o.className='od';u.prepend(o)}
- t.style.color=tcol(r.ti);t.textContent=(full?r.ti.n:r.ti.n.slice(0,3))+' '+Math.min(r.st,r.ti.s)+'/'+r.ti.s;d.append(n,u,t);return d}
+ t.style.color=tcol(r.ti);t.textContent=(full?r.ti.n:r.ti.n.slice(0,3))+' '+Math.min(r.st,r.ti.s)+'/'+r.ti.s;if(r.t===KER){const sm=document.createElement('b');sm.className='ksm';sm.innerHTML='<i></i><i></i><i></i><i></i>';d.append(sm)}d.append(n,u,t);return d}
 function renderBoard(){const m=$('lbr');m.innerHTML='';renderFriendList();
  if(!board){m.textContent='Offline';$('lbo').textContent='';return}
  $('lbo').textContent='\u25cf '+board.filter(e=>e.on).length+' ONLINE';
@@ -1271,24 +1348,35 @@ const mkBtn=(t,f,o)=>{const x=document.createElement('button');x.className='btn 
 function updBadge(){const n=IB.length+(PINV?1:0),b=$('ibadge');b.textContent=n;b.classList.toggle('hide',!n)}
 function renderFriendList(force){const b=$('fl');if(!b||!P)return;
  const lob=members().map(g=>g.name),t0=Date.now();
- const rows=FR.slice().sort((a,c)=>(isOn(c)-isOn(a))||(a<c?-1:1)).map(n=>{const e=board&&board.find(x=>x.u===n);return{n,on:isOn(n),ps:e?e.ps:-1,inL:lob.includes(n),sent:t0-(INV[n]||0)<INV_CD}});
+ const rows=FR.slice().sort((a,c)=>(P.sf.includes(c)-P.sf.includes(a))||(isOn(c)-isOn(a))||(a<c?-1:1)).map(n=>{const e=board&&board.find(x=>x.u===n);return{n,st:P.sf.includes(n),on:isOn(n),ps:e?e.ps:-1,inL:lob.includes(n),sent:t0-(INV[n]||0)<INV_CD}});
  const sig=JSON.stringify([rows,netOK]);if(!force&&sig===flSig)return;flSig=sig;b.innerHTML='';
  const on=rows.filter(r=>r.on).length,fc=$('fcnt');if(fc){fc.textContent=netOK?(rows.length?on+' ONLINE':''):'OFFLINE';fc.style.color=netOK?'#39ff6a':'#ff5a5a'}
  if(!rows.length){const e=document.createElement('div');e.className='fle';e.textContent=netOK?'Abhi koi friend nahi. + ADD dabao aur friend ki ID dalo.':'Internet nahi hai. Connection check karo.';b.appendChild(e);return}
- rows.forEach(r=>{const d=document.createElement('div');d.className='fl'+(r.on?'':' off');
+ rows.forEach(r=>{const d=document.createElement('div');d.className='fl'+(r.on?'':' off')+(r.st?' star':'');d.onclick=clk(()=>openFM(r.n));
   const o=document.createElement('i');o.className='od';const fn=document.createElement('div');fn.className='fn';
-  const u=document.createElement('span');u.className='u';u.textContent=r.n;fn.appendChild(u);
+  const u=document.createElement('span');u.className='u';u.textContent=(r.st?'\u2605 ':'')+r.n;fn.appendChild(u);
   if(r.ps>=0){const k=rk(r.ps),t=document.createElement('span');t.className='t';t.style.color=tcol(k.ti);t.textContent=k.ti.n+' '+Math.min(k.st,k.ti.s)+'/'+k.ti.s;fn.appendChild(t)}
   d.append(o,fn);
   if(r.inL){const x=document.createElement('span');x.className='inl';x.textContent='\u2713';d.appendChild(x)}
   else if(r.sent){const x=document.createElement('span');x.className='sent';x.dataset.f=r.n;x.textContent='SENT '+Math.max(1,Math.ceil((INV_CD-(t0-INV[r.n]))/1000))+'s';d.appendChild(x)}
-  else if(r.on){const x=document.createElement('button');x.className='fi';x.textContent='+';x.title='Invite';x.onclick=clk(()=>inviteFriend(r.n));d.appendChild(x)}
+  else if(r.on){const x=document.createElement('button');x.className='fi';x.textContent='+';x.title='Invite';x.onclick=clk(()=>inviteFriend(r.n));x.addEventListener('click',e=>e.stopPropagation());d.appendChild(x)}
   b.appendChild(d)})}
 function renderInbox(){const b=$('ibox');b.innerHTML='';
  const row=(txt,btns)=>{const d=document.createElement('div');d.className='fr';const u=document.createElement('span');u.className='u';u.textContent=txt;d.append(u,...btns);return d};
  if(PINV){const iv=PINV;b.appendChild(row(iv.from+' ne lobby mein invite kiya',[mkBtn('JOIN',()=>{dropInvite();joinInvite(iv)}),mkBtn('NO',()=>{dropInvite();renderInbox()},1)]))}
  IB.forEach(n=>b.appendChild(row(n+' wants to be friends',[mkBtn('ACCEPT',()=>acceptReq(n)),mkBtn('REJECT',()=>dropReq(n),1)])));
  if(!b.children.length){const e=document.createElement('div');e.className='p';e.textContent='Koi nayi request ya invite nahi.';b.appendChild(e)}}
+const FRDEL={};let fmu=null,fmAsk=false;
+function openFM(n){if(!P||state!=='menu')return;fmu=n;fmAsk=false;updFM();$('fmpop').classList.remove('hide')}
+function closeFM(){$('fmpop').classList.add('hide');fmu=null;fmAsk=false}
+function updFM(){if(!fmu||!P)return;const st=P.sf.includes(fmu),e=board&&board.find(x=>x.u===fmu);let t=isOn(fmu)?'ONLINE':'OFFLINE';if(e){const k=rk(e.ps);t+=' \u00b7 '+k.ti.n+' '+Math.min(k.st,k.ti.s)+'/'+k.ti.s}
+ $('fmn').textContent=(st?'\u2605 ':'')+fmu;$('fmr').textContent=t;$('fms').textContent=st?'REMOVE STAR':'\u2605 SET AS STAR FRIEND';$('fmd').textContent=fmAsk?'HAAN, DELETE KARO':'DELETE FRIEND';$('fmq').textContent=fmAsk?fmu+' ko friend list se hata dein? Dono ki list se delete ho jayega.':''}
+async function removeFriend(u){if(!P)return;FRDEL[u]=Date.now();FR=FR.filter(x=>x!==u);P.sf=P.sf.filter(x=>x!==u);savePlayer();renderFriendList(1);
+ try{await store.put('friends/'+P.u,FR);const fl=await getLx('friends/'+u);if(fl.includes(P.u))await store.put('friends/'+u,fl.filter(x=>x!==P.u));toast(u+' friend list se hata diya')}
+ catch(e){delete FRDEL[u];toast('Connection problem. Dobara try karo.');pollSocial()}}
+$('fms').onclick=clk(()=>{if(!fmu||!P)return;const u=fmu;if(P.sf.includes(u)){P.sf=P.sf.filter(x=>x!==u);toast(u+' star se hata diya')}else{P.sf=[...P.sf,u];toast(u+' star friend ban gaya')}savePlayer();renderFriendList(1);closeFM()});
+$('fmd').onclick=clk(()=>{if(!fmu)return;if(!fmAsk){fmAsk=true;updFM();return}const u=fmu;closeFM();removeFriend(u)});
+$('fmc').onclick=clk(closeFM);$('fmpop').addEventListener('pointerdown',e=>{if(e.target===$('fmpop'))closeFM()});
 async function addFriend(){const v=cleanUser($('fadd').value);if(!v)return;
  try{let u=/^\d+$/.test(v)?await store.get('uids/'+v):v;if(!u||!(await store.get('pub/'+u))){toast('Player not found');return}
   if(u===P.u){toast('That is your own ID');return}if(FR.includes(u)){toast('Already friends');return}
@@ -1334,7 +1422,7 @@ function showInvite(iv){lastInv=iv.t;$('popt').textContent='LOBBY INVITE';$('pop
  $('popy').onclick=clk(()=>{$('pop').classList.add('hide');dropInvite();joinInvite(iv)})}
 let socBusy=false,socFail=0;
 async function pollSocial(){if(!P||socBusy||idle())return;socBusy=true;try{const[fr,ib,on]=await Promise.all([getLx('friends/'+P.u),getLx('inbox/'+P.u),getOnline()]);netOK=true;socFail=0;
- FR=fr;IB=ib;onl=on||{};
+ FR=fr.filter(x=>!(FRDEL[x]&&Date.now()-FRDEL[x]<8000));IB=ib;onl=on||{};
  if(state==='menu'){if(prevIB===null){if(IB.length)toast('You have '+IB.length+' friend request(s) in INBOX')}else{const nw=IB.filter(x=>!prevIB.includes(x));if(nw.length)toast(nw[0]+' sent you a friend request. Open INBOX.')}}
  prevIB=IB.slice();updBadge();renderFriendList();if(!$('inb').classList.contains('hide'))renderInbox();}catch(e){if(++socFail>=2&&netOK){netOK=false;renderFriendList(1)}}finally{socBusy=false}}
 setInterval(pollSocial,3000);
@@ -1356,8 +1444,43 @@ $('faddb').onclick=clk(addFriend);$('fadd').addEventListener('keydown',e=>{if(e.
 $('inback').onclick=clk(()=>show('menu'));$('fadd2').onclick=clk(openAdd);$('inbb').onclick=clk(openInbox);
 $('lme').onclick=clk(openAlbum);$('albback').onclick=clk(()=>show('menu'));
 document.querySelectorAll('.stb').forEach(b=>b.onclick=clk(()=>{shopTab=+b.dataset.s;renderShop()}));
-$('lgo').onclick=()=>doAuth(false);$('lreg').onclick=()=>doAuth(true);
-$('lu').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('lp').focus()}});$('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doAuth(false)});
+$('lgo').onclick=()=>doAuth(false);
+let regMode=false;
+function setReg(on){regMode=on;$('lwa').classList.toggle('hide',!on);$('lgo').classList.toggle('hide',on);$('lback').classList.toggle('hide',!on);$('forgb').classList.toggle('hide',on);$('lp').autocomplete=on?'new-password':'current-password';lmsg(on?'Naya account: username, password aur WhatsApp number dalo.':'')}
+$('lreg').onclick=()=>{if(!regMode){setReg(true);return}doAuth(true)};$('lback').onclick=()=>setReg(false);
+$('lwa').addEventListener('keydown',e=>{if(e.key==='Enter')doAuth(true)});
+/* ----- whatsapp: bind (existing accounts) + password reset ----- */
+const ADMIN_WA=''; // optional: your own WhatsApp number (e.g. '923001234567'). If set, the reset screen shows a 'talk to admin' button.
+function normWA(v){let d=String(v||'').replace(/\D/g,'');if(d.startsWith('00'))d=d.slice(2);else if(d.startsWith('0'))d='92'+d.slice(1);return d.length>=10&&d.length<=15?d:''}
+function needBind(){if(P&&!P.wah&&state==='menu'){$('bwa').value='';$('bmsg').textContent='';$('bgo').disabled=false;$('bpop').classList.remove('hide')}}
+async function doBind(){if(!P)return;const wa=normWA($('bwa').value),m=$('bmsg');
+ if(!wa){m.textContent='Number sahi dalo (country code ke sath, jaise 923001234567)';return}
+ $('bgo').disabled=true;m.textContent='Please wait...';
+ try{const wah=await hashPw('wa:'+wa,P.salt,P.alg);await saving;P.wah=wah;await store.put('users/'+P.u,JSON.parse(JSON.stringify(P)));
+  $('bpop').classList.add('hide');toast('WhatsApp number bind ho gaya')}
+ catch(e){P.wah='';m.textContent=e.message==='nosub'?'Secure (https) page chahiye':'Connection problem. Dobara try karo.'}finally{$('bgo').disabled=false}}
+$('bgo').onclick=clk(doBind);$('bout').onclick=clk(logout);$('bwa').addEventListener('keydown',e=>{if(e.key==='Enter')doBind()});
+let rstFail=0,rstLock=0;
+$('forgb').onclick=clk(()=>{$('ru').value=cleanUser($('lu').value);['rw','rp','rp2'].forEach(i=>$(i).value='');$('rmsg').textContent='';$('radm').classList.toggle('hide',!ADMIN_WA);show('rst')});
+$('rback').onclick=clk(()=>show('login'));
+$('radm').onclick=clk(()=>{window.open('https://wa.me/'+ADMIN_WA+'?text='+encodeURIComponent('Salam, mera Tank War account ('+cleanUser($('ru').value)+') ka password reset karna hai.'),'_blank')});
+async function doReset(){const u=cleanUser($('ru').value),wa=normWA($('rw').value),np=$('rp').value,m=$('rmsg');
+ if(Date.now()<rstLock){m.textContent='Bohat galat koshishein. '+Math.ceil((rstLock-Date.now())/1000)+'s baad try karo.';return}
+ if(!/^[A-Z0-9_]{3,10}$/.test(u)){m.textContent='Username sahi dalo';return}
+ if(!wa){m.textContent='WhatsApp number sahi dalo (country code ke sath)';return}
+ if(np.length<4){m.textContent='Naya password kam az kam 4 characters ka ho';return}
+ if(np!==$('rp2').value){m.textContent='Dono password match nahi karte';return}
+ $('rgo').disabled=true;m.textContent='Please wait...';
+ try{const rec=await store.get('users/'+u);
+  if(!rec||!rec.hash){m.textContent='Is username ka account nahi mila';return}
+  if(!rec.wah){m.textContent='Is account mein WhatsApp bind nahi hai. Purane password se login karke bind karo.';return}
+  if(await hashPw('wa:'+wa,rec.salt,rec.alg)!==rec.wah){if(++rstFail>=5){rstFail=0;rstLock=Date.now()+60000}m.textContent='WhatsApp number is account se match nahi karta';return}
+  const salt=rndHex(16),alg=canSub()?'p':'w',hash=await hashPw(np,salt,alg),wah=await hashPw('wa:'+wa,salt,alg);
+  await store.put('users/'+u,Object.assign({},rec,{salt,alg,hash,wah}));rstFail=0;
+  ['rw','rp','rp2'].forEach(i=>$(i).value='');show('login');$('lu').value=u;$('lp').value='';lmsg('Password badal gaya. Naye password se login karo.')}
+ catch(e){m.textContent=e.message==='nosub'?'Secure (https) page chahiye':'Connection problem. Dobara try karo.'}finally{$('rgo').disabled=false}}
+$('rgo').onclick=clk(doReset);$('rp2').addEventListener('keydown',e=>{if(e.key==='Enter')doReset()});
+$('lu').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('lp').focus()}});$('lp').addEventListener('keydown',e=>{if(e.key==='Enter'){if(regMode)$('lwa').focus();else doAuth(false)}});
 if(window.ResizeObserver)new ResizeObserver(fitStage).observe($('stage'));addEventListener('resize',fitStage);
 function openDel(){if(!P)return;$('dpw').value='';$('dchk').checked=false;$('dmsg').textContent='';updDel();$('dpop').classList.remove('hide')}
 function updDel(){$('dgo').disabled=!($('dchk').checked&&$('dpw').value.length>=1)}
@@ -1369,7 +1492,7 @@ async function doDelete(){if(!P)return;const pw=$('dpw').value,u=P.u,uid=P.uid,f
   for(const f of fr){try{const fl=await getLx('friends/'+f);if(fl.includes(u))await store.put('friends/'+f,fl.filter(x=>x!==u))}catch(e){}}
   for(const p of ['users/'+u,'pub/'+u,'uids/'+uid,'online/'+u,'friends/'+u,'inbox/'+u,'invite/'+u])await store.put(p,null);
   $('dpop').classList.add('hide');try{localStorage.removeItem('tw_sess');localStorage.removeItem('tw_pend')}catch(e){}
-  netClose();P=null;FR=[];IB=[];PINV=null;prevIB=null;flSig='';$('fl').innerHTML='';state='menu';$('lu').value='';$('lp').value='';lmsg('');show('login');toast('Account delete ho gaya.')
+  netClose();P=null;FR=[];IB=[];PINV=null;prevIB=null;flSig='';$('fl').innerHTML='';state='menu';$('lu').value='';$('lp').value='';lmsg('');setReg(false);show('login');toast('Account delete ho gaya.')
  }catch(e){DEAD.delete(u);$('dmsg').textContent='Connection problem. Account delete nahi hua, dobara try karo.';updDel()}}
 $('delb').onclick=clk(openDel);$('dno').onclick=clk(()=>$('dpop').classList.add('hide'));$('dchk').onchange=updDel;$('dpw').oninput=updDel;$('dgo').onclick=clk(doDelete);
 $('lout').onclick=clk(logout);$('lbm').onclick=clk(openBoard);$('lbback').onclick=clk(()=>show('menu'));
